@@ -23,11 +23,6 @@ typealias MyListener = (String) -> Unit
 class MainActivity : AppCompatActivity() {
     lateinit var bindingClass: ActivityMainBinding
 
-    lateinit var a : Network
-
-    var par = 0
-
-
     fun getInfo(){ //можно сюда передавать аргумент того что хочешеь отобразить а подефолту какой-нибудь ondefault поставить за 24
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -61,7 +56,9 @@ class MainActivity : AppCompatActivity() {
             Network.tokenGet(login, password) {
                 if (it.isNotEmpty()){
                     runOnUiThread(Runnable {
-                        bindingClass.status.text = it
+                        var token = it
+                        if ("error" in token){bindingClass.status.text = token}
+
                     })
 
                 }
