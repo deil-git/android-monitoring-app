@@ -1,13 +1,13 @@
 package com.example.vkr
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityMainBinding
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.IOUtils
 import okhttp3.*
 import java.io.IOException
+import android.app.Activity
 
 //TODO{
 // Запарсить json https://developer.alexanderklimov.ru/android/library/retrofit.php
@@ -41,11 +41,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.d("CREATION", response.body()?.string().toString())
+                Log.d("CREATION", response.body?.string().toString())
             }
         })
     }
 
+
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
@@ -55,7 +58,14 @@ class MainActivity : AppCompatActivity() {
             val login = bindingClass.loginText.text.toString()
             val password = bindingClass.passwordText.text.toString()
 
+            Network.tokenGet(login, password) {
+                if (it.isNotEmpty()){
+                    runOnUiThread(Runnable {
+                        bindingClass.status.text = it
+                    })
 
+                }
+            }
 //            Log.d("CREATION", tokenGet(login, password))
 //
 //            var tokenPars = tokenGet(login, password)
@@ -66,8 +76,6 @@ class MainActivity : AppCompatActivity() {
 //            getInfo()
         }
 
-        bindingClass.button111.setOnClickListener {
-            Log.d("CREATION", Network)
-        }
+
     }
 }
