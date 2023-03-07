@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var a : Network
 
+    var par = 0
 
 
     fun getInfo(){ //можно сюда передавать аргумент того что хочешеь отобразить а подефолту какой-нибудь ondefault поставить за 24
