@@ -8,6 +8,9 @@ import com.example.vkr.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
 import android.app.Activity
+import android.content.Intent
+import android.os.Handler
+import okhttp3.internal.wait
 
 //TODO{
 // Запарсить json https://developer.alexanderklimov.ru/android/library/retrofit.php
@@ -63,6 +66,14 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+
+            Handler().postDelayed({
+                val intent = Intent(this, GraphActivity::class.java)
+                startActivity(intent)
+            }, 5000)
+
+
+
 //            Log.d("CREATION", tokenGet(login, password))
 //
 //            var tokenPars = tokenGet(login, password)
