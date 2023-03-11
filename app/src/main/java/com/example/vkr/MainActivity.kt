@@ -57,14 +57,21 @@ class MainActivity : AppCompatActivity() {
             val password = bindingClass.passwordText.text.toString()
 
             Network.tokenGet(login, password) {
-                if (it.isNotEmpty()){
-                    runOnUiThread(Runnable {
-                        var token = it
-                        if ("error" in token){bindingClass.status.text = token}
 
-                    })
+                runOnUiThread(Runnable {
+                    var token = it.token
+                    var error = it.error
 
-                }
+                    if(token.isNotEmpty()){
+                        bindingClass.status.text = token
+                    }
+                    else {
+                        bindingClass.status.text = error
+                    }
+
+                })
+
+
             }
 
             Handler().postDelayed({
