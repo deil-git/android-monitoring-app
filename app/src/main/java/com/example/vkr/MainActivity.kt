@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             Handler().postDelayed({
                 val intent = Intent(this, GraphActivity::class.java)
                 startActivity(intent)
-            }, 5000)
+            }, 500)
 
 
 

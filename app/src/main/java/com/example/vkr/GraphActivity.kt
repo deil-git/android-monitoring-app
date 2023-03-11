@@ -3,6 +3,7 @@ package com.example.vkr
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.vkr.databinding.ActivityGraphBinding
 
 class GraphActivity : AppCompatActivity() {
@@ -16,6 +17,10 @@ class GraphActivity : AppCompatActivity() {
 
         bindingClass.BackButton.setOnClickListener {
             finish()
+        }
+
+        bindingClass.testShkafButton.setOnClickListener {
+            Toast.makeText(applicationContext, "Нормал", Toast.LENGTH_LONG).show()
         }
 
         Network.getData(){
