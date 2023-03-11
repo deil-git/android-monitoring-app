@@ -12,16 +12,6 @@ import android.content.Intent
 import android.os.Handler
 import okhttp3.internal.wait
 
-//TODO{
-// Запарсить json https://developer.alexanderklimov.ru/android/library/retrofit.php
-// Как делать get, post and maybe put https://youtu.be/3KTXD_ckAX0?t=745
-// Как прально открывать новое окно
-// Как хранить токен https://metanit.com/java/android/2.2.php
-// Как нормально нарисовать карту
-// Через какую библиотеку строить графики
-// Поменять иконку
-// }
-
 typealias MyListener = (String) -> Unit
 class MainActivity : AppCompatActivity() {
     lateinit var bindingClass: ActivityMainBinding

@@ -19,8 +19,14 @@ class GraphActivity : AppCompatActivity() {
             finish()
         }
 
-        bindingClass.testShkafButton.setOnClickListener {
-            Toast.makeText(applicationContext, "Нормал", Toast.LENGTH_LONG).show()
+        bindingClass.IncubatorButton1.setOnClickListener {
+            Toast.makeText(applicationContext, "Нормал 1", Toast.LENGTH_SHORT).show()
+        }
+        bindingClass.incubatorButton2.setOnClickListener {
+            Toast.makeText(applicationContext, "Нормал 2", Toast.LENGTH_SHORT).show()
+        }
+        bindingClass.incubatorButton3.setOnClickListener {
+            Toast.makeText(applicationContext, "Нормал 3", Toast.LENGTH_SHORT).show()
         }
 
         Network.getData(){
