@@ -29,7 +29,9 @@ open class Network {
 
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
-                    val resp = gson.fromJson(response.body?.string().toString(), ServerResponse::class.java)
+                    val resp = gson.fromJson(
+                        response.body?.string().toString(),
+                        ServerResponse::class.java)
                     token = resp.token
                     onResult(resp)
                 }
