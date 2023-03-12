@@ -61,7 +61,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     else {
                         bindingClass.status.text = error
-                        Toast.makeText(applicationContext, "Неверный логин или пароль", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext,
+                            "Неверный логин или пароль",
+                            Toast.LENGTH_LONG).show()
                     }
                 })
             }
