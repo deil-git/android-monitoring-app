@@ -6,16 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
-import com.example.vkr.databinding.ActivityGraphBinding
+import com.example.vkr.databinding.ActivityMapBinding
 
 class MapActivity : AppCompatActivity() {
-    lateinit var bindingClass: ActivityGraphBinding
+    lateinit var bindingClass: ActivityMapBinding
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        bindingClass = ActivityGraphBinding.inflate(layoutInflater)
+        bindingClass = ActivityMapBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
         bindingClass.BackButton.setOnClickListener {
@@ -23,8 +23,8 @@ class MapActivity : AppCompatActivity() {
         }
 
         bindingClass.IncubatorButton1.setOnClickListener {
-//            val intent = Intent(this, MapActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, GraphActivity::class.java)
+            startActivity(intent)
         }
         bindingClass.incubatorButton2.setOnClickListener {
             Toast.makeText(applicationContext, "Нормал 2", Toast.LENGTH_SHORT).show()
