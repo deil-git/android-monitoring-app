@@ -10,6 +10,7 @@ import java.io.IOException
 import android.app.Activity
 import android.content.Intent
 import android.os.Handler
+import android.view.Window
 import okhttp3.internal.wait
 
 typealias MyListener = (String) -> Unit
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)

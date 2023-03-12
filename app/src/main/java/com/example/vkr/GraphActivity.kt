@@ -3,6 +3,7 @@ package com.example.vkr
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Toast
 import com.example.vkr.databinding.ActivityGraphBinding
 
@@ -11,6 +12,7 @@ class GraphActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
