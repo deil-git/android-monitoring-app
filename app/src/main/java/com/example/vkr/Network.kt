@@ -1,5 +1,6 @@
 package com.example.vkr
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
@@ -23,14 +24,13 @@ open class Network {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-
+                    Log.d("TOKEN", e.toString())
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
                     val resp = gson.fromJson(response.body?.string().toString(), ServerResponse::class.java)
                     token = resp.token
-                    //Log.d("TOKEN", resp.token)
                     onResult(resp)
                 }
             })
