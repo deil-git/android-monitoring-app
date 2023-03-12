@@ -2,7 +2,6 @@ package com.example.vkr
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -33,7 +32,16 @@ class GraphActivity : AppCompatActivity() {
         webview.webViewClient = WebViewClient()
         webview.webChromeClient = WebChromeClient()
 
-        webview.loadUrl("http://web.foodrus.ru/webdash")
+        var inc = 1
+        val extras = intent.extras
+        if (extras != null) {
+            inc = extras.getInt("inc")
+        }
 
+        when (inc) {
+            1 -> webview.loadUrl(HttpRoutes.INC1)
+            2 -> webview.loadUrl(HttpRoutes.INC2)
+            3 -> webview.loadUrl(HttpRoutes.INC3)
+        }
     }
 }

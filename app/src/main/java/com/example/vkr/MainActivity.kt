@@ -10,6 +10,7 @@ import java.io.IOException
 import android.content.Intent
 import android.os.Handler
 import android.view.Window
+import android.widget.Toast
 import okhttp3.internal.wait
 
 typealias MyListener = (String) -> Unit
@@ -55,33 +56,15 @@ class MainActivity : AppCompatActivity() {
 
                     if(token.isNotEmpty()){
                         bindingClass.status.text = token
+                        val intent = Intent(this, MapActivity::class.java)
+                        startActivity(intent)
                     }
                     else {
                         bindingClass.status.text = error
+                        Toast.makeText(applicationContext, "Неверный логин или пароль", Toast.LENGTH_LONG).show()
                     }
-
                 })
-
-
             }
-
-            Handler().postDelayed({
-                val intent = Intent(this, MapActivity::class.java)
-                startActivity(intent)
-            }, 500)
-
-
-
-//            Log.d("CREATION", tokenGet(login, password))
-//
-//            var tokenPars = tokenGet(login, password)
-////            Log.d("CREATION", tokenPars[0].toString())
-//            if(tokenPars == "\"error\": \"Unauthorized\""){
-//                Toast.makeText(applicationContext, "Неверный логин или пароль", Toast.LENGTH_LONG).show()
-//            }
-//            getInfo()
         }
-
-
     }
 }

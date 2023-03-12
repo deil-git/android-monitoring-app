@@ -24,13 +24,18 @@ class MapActivity : AppCompatActivity() {
 
         bindingClass.IncubatorButton1.setOnClickListener {
             val intent = Intent(this, GraphActivity::class.java)
+            intent.putExtra("inc", 1)
             startActivity(intent)
         }
         bindingClass.incubatorButton2.setOnClickListener {
-            Toast.makeText(applicationContext, "Нормал 2", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, GraphActivity::class.java)
+            intent.putExtra("inc", 2)
+            startActivity(intent)
         }
         bindingClass.incubatorButton3.setOnClickListener {
-            Toast.makeText(applicationContext, "Нормал 3", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, GraphActivity::class.java)
+            intent.putExtra("inc", 3)
+            startActivity(intent)
         }
 
         Network.getData(){
