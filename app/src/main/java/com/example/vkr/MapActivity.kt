@@ -1,13 +1,14 @@
 package com.example.vkr
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
 import com.example.vkr.databinding.ActivityGraphBinding
 
-class GraphActivity : AppCompatActivity() {
+class MapActivity : AppCompatActivity() {
     lateinit var bindingClass: ActivityGraphBinding
 
     @SuppressLint("SetTextI18n")
@@ -22,7 +23,8 @@ class GraphActivity : AppCompatActivity() {
         }
 
         bindingClass.IncubatorButton1.setOnClickListener {
-            Toast.makeText(applicationContext, "Нормал 1", Toast.LENGTH_SHORT).show()
+//            val intent = Intent(this, MapActivity::class.java)
+//            startActivity(intent)
         }
         bindingClass.incubatorButton2.setOnClickListener {
             Toast.makeText(applicationContext, "Нормал 2", Toast.LENGTH_SHORT).show()

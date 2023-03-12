@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
-import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.view.Window
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             Handler().postDelayed({
-                val intent = Intent(this, GraphActivity::class.java)
+                val intent = Intent(this, MapActivity::class.java)
                 startActivity(intent)
             }, 500)
 
