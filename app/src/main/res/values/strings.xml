@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Мониторинг</string>
+    <string name="JW1">JW1</string>
+    <string name="JW2">JW2</string>
+    <string name="JW3">JW3</string>
 </resources>
