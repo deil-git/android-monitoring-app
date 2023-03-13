@@ -52,6 +52,36 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/map" />
 
+            <TextView
+                android:id="@+id/JW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW3"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton3"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton3"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton3" />
+
+            <TextView
+                android:id="@+id/JW4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW2"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton2"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton2"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton2" />
+
+            <TextView
+                android:id="@+id/JW5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW1"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/IncubatorButton1"
+                app:layout_constraintEnd_toEndOf="@+id/IncubatorButton1"
+                app:layout_constraintStart_toStartOf="@+id/IncubatorButton1" />
+
             <ImageView
                 android:id="@+id/IncubatorButton1"
                 android:layout_width="42dp"
