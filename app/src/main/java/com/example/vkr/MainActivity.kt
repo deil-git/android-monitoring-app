@@ -68,5 +68,13 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
+
+
+
+
+        bindingClass.DELETEME.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
