@@ -18,7 +18,7 @@ open class Network {
             val client = OkHttpClient()
             val credential = Credentials.basic(login, password)
             val request = Request.Builder()
-                .url("http://web.foodrus.ru/api/tokens")
+                .url("https://web.foodrus.ru/api/tokens")
                 .addHeader("Authorization", credential)
                 .build()
 
@@ -42,7 +42,7 @@ open class Network {
             val client = OkHttpClient()
 
             val request = Request.Builder()
-                .url("http://web.foodrus.ru/api/indications/last")
+                .url("https://web.foodrus.ru/api/indications/last")
                 .addHeader("Authorization", "Bearer $token")
                 .build()
 
@@ -74,7 +74,7 @@ fun tokenGet(login: String, password: String) {
     val client = OkHttpClient()
     val credential = Credentials.basic(login, password)
     val request = Request.Builder()
-        .url("http://web.foodrus.ru/api/tokens")
+        .url("https://web.foodrus.ru/api/tokens")
         .addHeader("Authorization", credential)
         .build()
 
