@@ -5,6 +5,7 @@ import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.vkr.databinding.ActivityGraphBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -111,7 +112,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             set1.setDrawIcons(false)
 
             // draw dashed line
-            set1.enableDashedLine(10f, 5f, 0f)
+            //set1.enableDashedLine(10f, 5f, 0f)
 
             // black lines and points
             set1.color = Color.BLACK
@@ -126,7 +127,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             // customize legend entry
             set1.formLineWidth = 1f
-            set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+            //set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
             set1.formSize = 15f
 
             // text size of values
@@ -140,13 +141,10 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             set1.fillFormatter = IFillFormatter { dataSet, dataProvider -> chart.axisLeft.axisMinimum }
 
             // set color of filled area
-            /*if (Utils.getSDKInt() >= 18) {
-                // drawables only supported on api level 18 and above
-                val drawable = ContextCompat.getDrawable(this, R.drawable.fade_red)
+                val drawable = ContextCompat.getDrawable(this, R.color.teal_200)
                 set1.fillDrawable = drawable
-            } else {
-                set1.fillColor = Color.BLACK
-            }*/
+//                set1.fillColor = Color.BLACK
+
 
             val dataSets = ArrayList<ILineDataSet>()
             dataSets.add(set1) // add the data sets

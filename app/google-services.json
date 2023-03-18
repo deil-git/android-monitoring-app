@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "943790030033",
+    "project_id": "foodrus-32dac",
+    "storage_bucket": "foodrus-32dac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943790030033:android:50c254e7e7876f2df259f0",
+        "android_client_info": {
+          "package_name": "com.example.vkr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943790030033-he3grtk8pqjf14f6j21ivbcb5rnshj3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk04mzll1R6p4HinqRhcKaMvX8Tz63Huw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943790030033-he3grtk8pqjf14f6j21ivbcb5rnshj3q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
