@@ -43,7 +43,7 @@ open class Network {
             val client = OkHttpClient()
 
             val request = Request.Builder()
-                .url("https://web.foodrus.ru/api/indications/last")
+                .url("https://web.foodrus.ru/get/JW1?start=2023-02-27T00:57:00&end=2023-02-28T18:57:00")
                 .addHeader("Authorization", "Bearer $token")
                 .build()
 

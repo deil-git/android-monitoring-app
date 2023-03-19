@@ -3,6 +3,7 @@ package com.example.vkr
 import android.graphics.Color
 import android.graphics.DashPathEffect
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -29,6 +30,18 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
+        Network.getData {
+            runOnUiThread(Runnable {
+                Log.d("getData", it[0].toString())
+                var r: String = ""
+                for(d in it){
+                    r += "${d.temp} ${d.hum} ${d.id_box} \n"
+
+                }
+                Log.d("getData", r)
+            })
+        }
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)

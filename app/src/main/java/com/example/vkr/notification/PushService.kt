@@ -12,17 +12,17 @@ class PushService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d("Test1", "From: ${remoteMessage.from}")
+        Log.d("Ntf", "From: ${remoteMessage.from}")
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
-            Log.d("Test1", "Message data payload: ${remoteMessage.data}")
+            Log.d("Ntf", "Message data payload: ${remoteMessage.data}")
 
         }
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
-            Log.d("Test1", "Message Notification Body: ${it.body}")
+            Log.d("Ntf", "Message Notification Body: ${it.body}")
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
