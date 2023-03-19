@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
-
+        lateinit var FCMtoken: String;
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w("firebase", "Fetching FCM registration token failed", task.exception)
@@ -69,10 +69,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Get new FCM registration token
-            val token = task.result
+            FCMtoken = task.result
 
             // Log and toast
-            val msg = token.toString()
+            val msg = FCMtoken.toString()
             Log.d("firebase", msg)
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
@@ -92,6 +92,9 @@ class MainActivity : AppCompatActivity() {
                     if(token.isNotEmpty()){
                         bindingClass.status.text = token
                         val intent = Intent(this, MapActivity::class.java)
+                        Network.sendFCM(FCMtoken) {
+                            //Nothing to do
+                        }
                         startActivity(intent)
                     }
                     else {
@@ -102,6 +105,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             }
+
+
         }
 
 

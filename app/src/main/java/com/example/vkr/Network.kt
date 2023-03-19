@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.IOException
 import java.lang.reflect.Type
 import java.util.*
@@ -59,6 +60,36 @@ open class Network {
 
                     //Log.d("TOKEN", resp.token)
                     onResult(userList)
+                }
+            })
+        }
+
+        fun sendFCM(FCMtoken: String, onResult: (String) -> Unit) {
+            val client = OkHttpClient()
+
+            val data = "{ \"fcm\" : \"$FCMtoken\" }"
+            Log.d("FTOKEN", data)
+            val body: RequestBody = RequestBody.create(
+                "application/json".toMediaTypeOrNull(), data
+            )
+
+            val request = Request.Builder()
+                .url("https://web.foodrus.ru/api/fcmtoken")
+                .addHeader("Authorization", "Bearer $token")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
+                    val res = response.body?.string().toString()
+                    Log.d("FTOKEN", res)
+                    onResult(res)
                 }
             })
         }
