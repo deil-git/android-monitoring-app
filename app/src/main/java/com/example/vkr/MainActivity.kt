@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             // Log and toast
             val msg = FCMtoken.toString()
             Log.d("firebase", msg)
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
 
 
