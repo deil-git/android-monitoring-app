@@ -37,17 +37,5 @@ class MapActivity : AppCompatActivity() {
             intent.putExtra("inc", 3)
             startActivity(intent)
         }
-
-//        Network.getData(){
-//            runOnUiThread(Runnable {
-//                bindingClass.respons.text = it[0].toString()
-//                var r: String = ""
-//                for(d in it){
-//                    r += "${d.temp} ${d.hum} ${d.id_box} \n"
-//
-//                }
-//                bindingClass.respons.text = r
-//            })
-//        }
     }
 }

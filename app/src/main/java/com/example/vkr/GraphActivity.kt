@@ -1,12 +1,10 @@
 package com.example.vkr
 
 import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.vkr.databinding.ActivityGraphBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -15,15 +13,18 @@ import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import java.util.stream.IntStream.range
 
 
 class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     lateinit var bindingClass: ActivityGraphBinding
     lateinit var chart: LineChart
+    var atemp = arrayListOf<Float>()
+    var ahum = arrayListOf<Float>()
+    var atime = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -34,9 +35,13 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         Network.getData {
             runOnUiThread(Runnable {
                 Log.d("getData", it[0].toString())
+
                 var r: String = ""
                 for(d in it){
-                    r += "${d.temp} ${d.hum} ${d.id_box} \n"
+                    r += "${d.temp} ${d.hum} ${d.time} \n"
+                    atemp.add(d.temp)
+                    ahum.add(d.hum)
+                    atime.add(d.time)
 
                 }
                 Log.d("getData", r)
@@ -102,13 +107,20 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
     private fun setData(count: Int, range: Float) {
 
-        val values = ArrayList<Entry>()
-
-        for (i in 0 until count) {
-
-            val value = (Math.random() * range).toFloat() - 30
-            values.add(Entry(i.toFloat(), value/*, resources.getDrawable(R.drawable.star)*/))
+        val values: ArrayList<Entry> = ArrayList()
+        for (i in 0 until atemp.size) {
+            // turn your data into Entry objects
+            values.add(Entry(i.toFloat(), atemp[i]))
+            Log.d("aaa", atemp.toString())
         }
+
+//        val values = ArrayList<Entry>()
+//
+//        for (i in 0 until count) {
+//
+//            val value = (Math.random() * range).toFloat() - 30
+//            values.add(Entry(i.toFloat(), value/*, resources.getDrawable(R.drawable.star)*/))
+//        }
 
         val set1: LineDataSet
 
@@ -150,12 +162,12 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             set1.enableDashedHighlightLine(10f, 5f, 0f)
 
             // set the filled area
-            set1.setDrawFilled(true)
-            set1.fillFormatter = IFillFormatter { dataSet, dataProvider -> chart.axisLeft.axisMinimum }
+//            set1.setDrawFilled(true)
+//            set1.fillFormatter = IFillFormatter { dataSet, dataProvider -> chart.axisLeft.axisMinimum }
 
             // set color of filled area
-                val drawable = ContextCompat.getDrawable(this, R.color.teal_200)
-                set1.fillDrawable = drawable
+//                val drawable = ContextCompat.getDrawable(this, R.color.teal_200)
+//                set1.fillDrawable = drawable
 //                set1.fillColor = Color.BLACK
 
 
