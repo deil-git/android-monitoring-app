@@ -26,27 +26,14 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     var ahum = arrayListOf<Float>()
     var atime = arrayListOf<String>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-        Network.getData {
-            runOnUiThread(Runnable {
-                Log.d("getData", it[0].toString())
 
-                var r: String = ""
-                for(d in it){
-                    r += "${d.temp} ${d.hum} ${d.time} \n"
-                    atemp.add(d.temp)
-                    ahum.add(d.hum)
-                    atime.add(d.time)
-
-                }
-                Log.d("getData", r)
-            })
-        }
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)
@@ -96,11 +83,27 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         yAxis.addLimitLine(ll1)
         yAxis.addLimitLine(ll2)
 
-        setData(45, 180f)
 
         chart.animateX(1500)
         val legend = chart.legend
         legend.form = Legend.LegendForm.LINE
+
+        Network.getData {
+            runOnUiThread(Runnable {
+                Log.d("getData", it[0].toString())
+
+                var r: String = ""
+                for(d in it){
+                    r += "${d.temp} ${d.hum} ${d.time} \n"
+                    atemp.add(d.temp)
+                    ahum.add(d.hum)
+                    atime.add(d.time)
+
+                }
+                Log.d("getData", r)
+                setData(45, 180f)
+            })
+        }
 
     }
 
