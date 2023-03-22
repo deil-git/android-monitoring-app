@@ -1,5 +1,6 @@
 package com.example.vkr
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -7,16 +8,41 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.google.android.material.timepicker.TimeFormat
+import java.sql.Time
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
+class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
+
+    @SuppressLint("SimpleDateFormat")
+    override fun getFormattedValue(value: Float): String? {
+        // Convert float value to date string
+        // Convert from seconds back to milliseconds to format time  to show to the user
+        val emissionsMilliSince1970Time = value.toLong() * 1000
+
+        // Show time in local version
+        val date = Date(emissionsMilliSince1970Time)
+        val format = SimpleDateFormat("MM.dd HH:mm:ss")
+        return format.format(date)
+//        val dateTimeFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+//        return dateTimeFormat.format(timeMilliseconds)
+    }
+}
 
 class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     lateinit var bindingClass: ActivityGraphBinding
@@ -24,9 +50,10 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     lateinit var chart2: LineChart
     var atemp = arrayListOf<Float>()
     var ahum = arrayListOf<Float>()
-    var atime = arrayListOf<String>()
+    var atime = arrayListOf<Float>()
 
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
@@ -58,9 +85,10 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
 
         val xAxis = chart.xAxis
-        val xAxis2 = chart2.xAxis
-        xAxis.enableGridDashedLine(10f,10f,0f)
-        xAxis2.enableGridDashedLine(10f,10f,0f)
+        chart.xAxis.valueFormatter = LineChartXAxisValueFormatter()
+
+//        xAxis.enableGridDashedLine(10f,10f,0f)
+//        xAxis2.enableGridDashedLine(10f,10f,0f)
 
         val yAxis = chart.axisLeft
         val yAxis2 = chart2.axisRight
@@ -112,14 +140,20 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         Network.getData {
             runOnUiThread(Runnable {
                 Log.d("getData", it[0].toString())
-
                 var r: String = ""
+
                 for(d in it){
-                    r += "${d.temp} ${d.hum} ${d.time} \n"
+
                     atemp.add(d.temp)
                     ahum.add(d.hum)
-                    atime.add(d.time)
 
+                    val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
+                    val tm = d.time
+                    val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
+                    val date = format.parse(s)
+                    val floatTime = date.time.toFloat() / 1000
+                    atime.add(floatTime)
+                    r += "${d.temp} ${d.hum} ${floatTime} \n"
                 }
                 Log.d("getData", r)
                 setData(45, 180f)
@@ -134,13 +168,13 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val values: ArrayList<Entry> = ArrayList()
         for (i in 0 until atemp.size) {
             // turn your data into Entry objects
-            values.add(Entry(i.toFloat(), atemp[i]))
+            values.add(Entry(atime[i], atemp[i]))
         }
 
         val values2: ArrayList<Entry> = ArrayList()
         for (i in 0 until ahum.size) {
             // turn your data into Entry objects
-            values2.add(Entry(i.toFloat(), ahum[i]))
+            values2.add(Entry(atime[i], ahum[i]))
         }
 
         val set1: LineDataSet
