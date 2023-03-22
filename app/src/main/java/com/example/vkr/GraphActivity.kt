@@ -94,10 +94,10 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val yAxis2 = chart2.axisRight
 //        chart.axisRight.isEnabled = false
         yAxis.enableGridDashedLine(10f, 10f, 0f)
-        yAxis.setAxisMaximum(34f)
+        yAxis.setAxisMaximum(33f)
         yAxis.setAxisMinimum(26f)
         yAxis2.enableGridDashedLine(10f, 10f, 0f)
-        yAxis2.setAxisMaximum(34f)
+        yAxis2.setAxisMaximum(33f)
         yAxis2.setAxisMinimum(26f)
 
         val llXAxis = LimitLine(9f, "Index 10")
@@ -107,19 +107,31 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         llXAxis.textSize = 10f
         //llXAxis.typeface = tfRegular
 
-        val ll1 = LimitLine(150f, "Upper Limit")
-        ll1.lineWidth = 4f
+        val ll1 = LimitLine(28.5f, "макс. темп.")
+        ll1.lineWidth = 3f
         ll1.enableDashedLine(10f, 10f, 0f)
         ll1.labelPosition = LimitLabelPosition.RIGHT_TOP
         ll1.textSize = 10f
         //ll1.typeface = tfRegular
 
-        val ll2 = LimitLine(-30f, "Lower Limit")
-        ll2.lineWidth = 4f
+        val ll2 = LimitLine(27f, "мин. темп.")
+        ll2.lineWidth = 3f
         ll2.enableDashedLine(10f, 10f, 0f)
         ll2.labelPosition = LimitLabelPosition.RIGHT_BOTTOM
         ll2.textSize = 10f
         //ll2.typeface = tfRegular
+
+        val ll3 = LimitLine(31.5f, "макс. влаж.")
+        ll3.lineWidth = 3f
+        ll3.enableDashedLine(10f, 10f, 0f)
+        ll3.labelPosition = LimitLabelPosition.RIGHT_TOP
+        ll3.textSize = 10f
+
+        val ll4 = LimitLine(29.5f, "мин. влаж.")
+        ll4.lineWidth = 3f
+        ll4.enableDashedLine(10f, 10f, 0f)
+        ll4.labelPosition = LimitLabelPosition.RIGHT_BOTTOM
+        ll4.textSize = 10f
 
         // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true)
@@ -128,6 +140,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         // add limit lines
         yAxis.addLimitLine(ll1)
         yAxis.addLimitLine(ll2)
+        yAxis.addLimitLine(ll3)
+        yAxis.addLimitLine(ll4)
 
 
         chart.animateX(1500)
