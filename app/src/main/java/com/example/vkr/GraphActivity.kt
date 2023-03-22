@@ -248,7 +248,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             set2.valueTextSize = 0f
 
             // draw selection line as dashed
-            //set1.enableDashedHighlightLine(10f, 5f, 0f)
+            set1.enableDashedHighlightLine(10f, 5f, 0f)
 
             // set the filled area
 //            set1.setDrawFilled(true)
