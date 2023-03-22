@@ -35,7 +35,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)
-        chart.description.isEnabled = false
+        chart.description.isEnabled = true
         chart.setTouchEnabled(true)
         chart.setOnChartValueSelectedListener(this)
         chart.setDrawGridBackground(false)
@@ -44,13 +44,18 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         chart.setPinchZoom(true)
         chart2 = findViewById(bindingClass.chart1.id)
         chart2.setBackgroundColor(Color.WHITE)
-        chart2.description.isEnabled = false
+        chart2.description.isEnabled = true
         chart2.setTouchEnabled(true)
         chart2.setOnChartValueSelectedListener(this)
         chart2.setDrawGridBackground(false)
         chart2.isDragEnabled = true
         chart2.setScaleEnabled(true)
         chart2.setPinchZoom(true)
+
+        val description = chart.description
+        description.textSize = 24f
+        description.text = ""
+
 
         val xAxis = chart.xAxis
         val xAxis2 = chart2.xAxis
@@ -61,11 +66,11 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val yAxis2 = chart2.axisRight
 //        chart.axisRight.isEnabled = false
         yAxis.enableGridDashedLine(10f, 10f, 0f)
-        yAxis.setAxisMaximum(40f)
-        yAxis.setAxisMinimum(-50f)
+        yAxis.setAxisMaximum(34f)
+        yAxis.setAxisMinimum(26f)
         yAxis2.enableGridDashedLine(10f, 10f, 0f)
-        yAxis2.setAxisMaximum(40f)
-        yAxis2.setAxisMinimum(10f)
+        yAxis2.setAxisMaximum(34f)
+        yAxis2.setAxisMinimum(26f)
 
         val llXAxis = LimitLine(9f, "Index 10")
         llXAxis.lineWidth = 4f
@@ -154,11 +159,11 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             chart2.notifyDataSetChanged()
         } else {
             // create a dataset and give it a type
-            set1 = LineDataSet(values, "DataSet 1")
+            set1 = LineDataSet(values, "Температура")
 
             set1.setDrawIcons(false)
 
-            set2 = LineDataSet(values2, "DataSet 2")
+            set2 = LineDataSet(values2, "Влажность")
 
             set2.setDrawIcons(false)
 
@@ -227,7 +232,15 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     override fun onValueSelected(e: Entry?, h: Highlight?) {
         bindingClass.chart1.highlightValue(h);
         if (h != null) {
-            Log.d("Highlight", "onValueSelected: " + h.getY())
+            val description = chart.description
+            if (h.getY() < 28.5){
+                description.text = h.getY().toString() + "°С"
+            }
+            else{
+                description.text = h.getY().toString() + "%"
+            }
+
+            Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
         };
     }
 
