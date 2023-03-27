@@ -170,14 +170,14 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                     r += "${d.temp} ${d.hum} ${floatTime} \n"
                 }
                 Log.d("getData", r)
-                setData(45, 180f)
+                setData()
             })
         }
 
     }
 
 
-    private fun setData(count: Int, range: Float) {
+    private fun setData() {
 
         val values: ArrayList<Entry> = ArrayList()
         for (i in 0 until atemp.size) {
@@ -281,7 +281,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         bindingClass.chart1.highlightValue(h);
         if (h != null) {
             val description = chart.description
-            if (h.getY() < 28.5){
+            if (h.dataSetIndex == 0){
                 description.text = h.getY().toString() + "°С"
             }
             else{
