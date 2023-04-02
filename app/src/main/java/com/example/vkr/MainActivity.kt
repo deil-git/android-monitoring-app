@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
 
         bindingClass.DELETEME.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
+            val intent = Intent(this, GraphActivity::class.java)
             startActivity(intent)
         }
     }
