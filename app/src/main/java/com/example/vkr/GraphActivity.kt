@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -164,9 +165,11 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         executorService.scheduleAtFixedRate({
             Network.getData {
                 runOnUiThread(Runnable {
-                    Log.d("getData", it[0].toString())
+                    //Log.d("getData", it[0].toString())
                     var r: String = ""
-
+                    atime.clear()
+                    atemp.clear()
+                    ahum.clear()
                     for(d in it){
 
                         atemp.add(d.temp)
@@ -184,13 +187,15 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                     setData()
                 })
             }
-        }, 0, 3, TimeUnit.SECONDS)
+        }, 0, 5, TimeUnit.SECONDS)
 
     }
 
 
 
     private fun setData() {
+
+        chart.data = null
 
         val values: ArrayList<Entry> = ArrayList()
         for (i in 0 until atemp.size) {
@@ -203,10 +208,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             // turn your data into Entry objects
             values2.add(Entry(atime[i], ahum[i]))
         }
-
-        atime.clear()
-        atemp.clear()
-        ahum.clear()
 
         val set1: LineDataSet
         val set2: LineDataSet
@@ -286,6 +287,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             // set data
             chart.data = data
+
+            chart.invalidate()
 
         }
     }
