@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ФудРус Мониторинг</string>
     <string name="GraphLabel">Температура °C, Влажность %</string>
+    <string name="TimePickTitle">Выберите способ отображения графика</string>
+    <string name="RealTime">В реальном времени</string>
+    <string name="PromTime">В промежутке времени</string>
+    <string name="PickDateTime">Выбор даты/времени</string>
     <string name="JW1">JW1</string>
     <string name="JW2">JW2</string>
     <string name="JW3">JW3</string>
