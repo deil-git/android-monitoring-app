@@ -156,33 +156,35 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val legend2 = chart2.legend
         legend2.form = Legend.LegendForm.LINE
 
-        Network.getData {
-            runOnUiThread(Runnable {
-                Log.d("getData", it[0].toString())
-                var r: String = ""
 
-                for(d in it){
-
-                    atemp.add(d.temp)
-                    ahum.add(d.hum)
-
-                    val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
-                    val tm = d.time
-                    val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
-                    val date = format.parse(s)
-                    val floatTime = date.time.toFloat() / 1000
-                    atime.add(floatTime)
-                    r += "${d.temp} ${d.hum} ${floatTime} \n"
-                }
-                Log.d("getData", r)
-                setData()
-            })
-        }
 
 
 
         val executorService = Executors.newSingleThreadScheduledExecutor()
-        executorService.scheduleAtFixedRate({         }, 0, 1, TimeUnit.SECONDS)
+        executorService.scheduleAtFixedRate({
+            Network.getData {
+                runOnUiThread(Runnable {
+                    Log.d("getData", it[0].toString())
+                    var r: String = ""
+
+                    for(d in it){
+
+                        atemp.add(d.temp)
+                        ahum.add(d.hum)
+
+                        val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
+                        val tm = d.time
+                        val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
+                        val date = format.parse(s)
+                        val floatTime = date.time.toFloat() / 1000
+                        atime.add(floatTime)
+                        r += "${d.temp} ${d.hum} ${floatTime} \n"
+                    }
+                    Log.d("getData", r)
+                    setData()
+                })
+            }
+        }, 0, 3, TimeUnit.SECONDS)
 
     }
 
@@ -201,6 +203,10 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             // turn your data into Entry objects
             values2.add(Entry(atime[i], ahum[i]))
         }
+
+        atime.clear()
+        atemp.clear()
+        ahum.clear()
 
         val set1: LineDataSet
         val set2: LineDataSet
