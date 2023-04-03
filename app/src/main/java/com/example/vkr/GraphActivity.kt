@@ -21,6 +21,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 
 class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
@@ -147,7 +149,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         yAxis.addLimitLine(ll3)
         yAxis.addLimitLine(ll4)
 
-
         chart.animateX(1500)
         val legend = chart.legend
         legend.form = Legend.LegendForm.LINE
@@ -178,7 +179,13 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             })
         }
 
+
+
+        val executorService = Executors.newSingleThreadScheduledExecutor()
+        executorService.scheduleAtFixedRate({         }, 0, 1, TimeUnit.SECONDS)
+
     }
+
 
 
     private fun setData() {
