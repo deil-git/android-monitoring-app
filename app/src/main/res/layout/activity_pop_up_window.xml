@@ -4,27 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Tutorials Point"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+
     <Button
-        android:id="@+id/btnPick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:id="@+id/btnPick2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/btnPick1"
+        android:layout_alignBottom="@+id/btnPick1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/btnPick1"
         android:text="Pick Date and TIme" />
+
+    <Button
+        android:id="@+id/btnPick1"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="60dp"
+        android:text="Pick Date and TIme" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnPick"
+        android:layout_below="@id/btnPick1"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/background_dark"

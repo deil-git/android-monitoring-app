@@ -22,17 +22,17 @@ class MapActivity : AppCompatActivity() {
             finish()
         }
 
-        bindingClass.IncubatorButton1.setOnClickListener {
+        bindingClass.IncubatorButton1?.setOnClickListener {
             val intent = Intent(this, GraphActivity::class.java)
             intent.putExtra("inc", 1)
             startActivity(intent)
         }
-        bindingClass.incubatorButton2.setOnClickListener {
+        bindingClass.incubatorButton2?.setOnClickListener {
             val intent = Intent(this, GraphActivity::class.java)
             intent.putExtra("inc", 2)
             startActivity(intent)
         }
-        bindingClass.incubatorButton3.setOnClickListener {
+        bindingClass.incubatorButton3?.setOnClickListener {
             val intent = Intent(this, GraphActivity::class.java)
             intent.putExtra("inc", 3)
             startActivity(intent)

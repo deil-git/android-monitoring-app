@@ -42,6 +42,159 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/JW6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW6"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton6"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton6"
+                app:layout_constraintHorizontal_bias="0.45"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton6"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButton6"
+                app:layout_constraintVertical_bias="0.493" />
+
+            <ImageView
+                android:id="@+id/incubatorButton6"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0147"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+            <TextView
+                android:id="@+id/JW5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW5"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton5"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton5"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton5"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButton5"
+                app:layout_constraintVertical_bias="0.493" />
+
+            <ImageView
+                android:id="@+id/incubatorButton5"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.062"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+            <TextView
+                android:id="@+id/JW4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW4"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton4"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton4"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton4"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButton4" />
+
+            <ImageView
+                android:id="@+id/incubatorButton4"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+            <TextView
+                android:id="@+id/JW3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW3"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton3"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton3"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton3"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButton3" />
+
+            <ImageView
+                android:id="@+id/incubatorButton3"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.165"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+            <TextView
+                android:id="@+id/JW2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW2"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton2"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButton2"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButton2"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButton2" />
+
+            <ImageView
+                android:id="@+id/incubatorButton2"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.217"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
+            <TextView
+                android:id="@+id/JW1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JW1"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/IncubatorButton1"
+                app:layout_constraintEnd_toEndOf="@+id/IncubatorButton1"
+                app:layout_constraintStart_toStartOf="@+id/IncubatorButton1"
+                app:layout_constraintTop_toTopOf="@+id/IncubatorButton1" />
+
+            <ImageView
+                android:id="@+id/IncubatorButton1"
+                android:layout_width="48dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.268"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
             <ImageView
                 android:id="@+id/mapView"
                 android:layout_width="1200dp"
@@ -54,78 +207,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.502"
                 app:srcCompat="@drawable/map" />
-
-            <ImageView
-                android:id="@+id/IncubatorButton1"
-                android:layout_width="42dp"
-                android:layout_height="80dp"
-                android:clickable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.27"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.564"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
-
-            <TextView
-                android:id="@+id/JW3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/JW3"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton3"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton3"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton3" />
-
-            <TextView
-                android:id="@+id/JW2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/JW2"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton2"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton2"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton2" />
-
-            <TextView
-                android:id="@+id/JW1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/JW1"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/IncubatorButton1"
-                app:layout_constraintEnd_toEndOf="@+id/IncubatorButton1"
-                app:layout_constraintStart_toStartOf="@+id/IncubatorButton1" />
-
-            <ImageView
-                android:id="@+id/incubatorButton2"
-                android:layout_width="42dp"
-                android:layout_height="80dp"
-                android:clickable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.219"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.564"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
-
-            <ImageView
-                android:id="@+id/incubatorButton3"
-                android:layout_width="42dp"
-                android:layout_height="80dp"
-                android:clickable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.167"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.564"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>

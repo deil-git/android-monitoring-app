@@ -37,8 +37,18 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         bindingClass = ActivityPopUpWindowBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
         textView = findViewById(R.id.textView)
-        button = findViewById(R.id.btnPick)
-        button.setOnClickListener {
+
+        bindingClass.btnPick1.setOnClickListener {
+            val calendar: Calendar = Calendar.getInstance()
+            day = calendar.get(Calendar.DAY_OF_MONTH)
+            month = calendar.get(Calendar.MONTH)
+            year = calendar.get(Calendar.YEAR)
+            val datePickerDialog =
+                DatePickerDialog(this, this, year, month, day)
+            datePickerDialog.show()
+        }
+
+        bindingClass.btnPick2.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
             month = calendar.get(Calendar.MONTH)
@@ -55,7 +65,7 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myDay = dayOfMonth
         myYear = year
-        myMonth = month
+        myMonth = month + 1
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
