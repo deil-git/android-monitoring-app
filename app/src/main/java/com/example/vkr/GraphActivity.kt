@@ -156,11 +156,18 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val legend2 = chart2.legend
         legend2.form = Legend.LegendForm.LINE
 
-        Network.getData {
+
+
+
+
+        val executorService = Executors.newSingleThreadScheduledExecutor()
+        executorService.scheduleAtFixedRate({     Network.getData {
             runOnUiThread(Runnable {
                 Log.d("getData", it[0].toString())
                 var r: String = ""
-
+                atemp.clear()
+                ahum.clear()
+                atime.clear()
                 for(d in it){
 
                     atemp.add(d.temp)
@@ -177,18 +184,15 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                 Log.d("getData", r)
                 setData()
             })
-        }
-
-
-
-        val executorService = Executors.newSingleThreadScheduledExecutor()
-        executorService.scheduleAtFixedRate({         }, 0, 1, TimeUnit.SECONDS)
+        }    }, 0, 5, TimeUnit.SECONDS)
 
     }
 
 
 
     private fun setData() {
+
+        chart.data = null
 
         val values: ArrayList<Entry> = ArrayList()
         for (i in 0 until atemp.size) {
@@ -280,6 +284,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             // set data
             chart.data = data
+
+            chart.invalidate()
 
         }
     }
