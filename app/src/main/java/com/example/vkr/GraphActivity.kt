@@ -23,6 +23,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
+import java.util.concurrent.Future
+import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 
@@ -44,6 +46,7 @@ class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
 }
 
 class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
+    lateinit var executorService: ScheduledExecutorService
     lateinit var bindingClass: ActivityGraphBinding
     lateinit var chart: LineChart
     lateinit var chart2: LineChart
@@ -57,15 +60,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
-
-        bindingClass.ParamButton.setOnClickListener {
-            val intent = Intent(this, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "Error")
-            intent.putExtra("popuptext", "Sorry, that email address is already used!")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
-            startActivity(intent)
-        }
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)
@@ -157,11 +151,28 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val legend2 = chart2.legend
         legend2.form = Legend.LegendForm.LINE
 
+        bindingClass.ParamButton.setOnClickListener {
+            val intent = Intent(this, PopUpWindow::class.java)
+            intent.putExtra("popuptitle", "Error")
+            intent.putExtra("popuptext", "Sorry, that email address is already used!")
+            intent.putExtra("popupbtn", "OK")
+            intent.putExtra("darkstatusbar", false)
+            startActivity(intent)
+        }
 
-
-
-
-        val executorService = Executors.newSingleThreadScheduledExecutor()
+    }
+    override fun onPause() {
+        super.onPause()
+        executorService.shutdown()
+    }
+    override fun onStop() {
+        super.onStop()
+        executorService.shutdown()
+    }
+    @SuppressLint("SimpleDateFormat")
+    override fun onResume() {
+        super.onResume()
+        executorService = Executors.newSingleThreadScheduledExecutor()
         executorService.scheduleAtFixedRate({
             Network.getData {
                 runOnUiThread(Runnable {
@@ -183,15 +194,12 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                         atime.add(floatTime)
                         r += "${d.temp} ${d.hum} ${floatTime} \n"
                     }
-                    Log.d("getData", r)
+                    Log.d("getData", "итерация")
                     setData()
                 })
             }
         }, 0, 5, TimeUnit.SECONDS)
-
     }
-
-
 
     private fun setData() {
 
@@ -308,7 +316,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                 description.text = h.getY().toString() + "%"
             }
 
-            Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
+            //Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
         };
     }
 
