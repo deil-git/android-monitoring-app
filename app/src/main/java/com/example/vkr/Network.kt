@@ -39,14 +39,24 @@ open class Network {
             })
         }
 
-        fun getData(onResult: (Vector<ServerResponse.Data>) -> Unit) {
+        fun getData(incubNum :String, typeGraph :String, promStart :String, promEnd :String, onResult: (Vector<ServerResponse.Data>) -> Unit) {
             val client = OkHttpClient()
+            lateinit var request: Request
 
-            val request = Request.Builder()
-                //.url("https://web.foodrus.ru/api/indications/JW1?start=2023-02-27T13:15:16&end=2023-02-27T13:17:16")
-                .url("https://web.foodrus.ru/indications/JW2")
-                .addHeader("Authorization", "Bearer $token")
-                .build()
+            if(typeGraph == "RealTime"){
+                request = Request.Builder()
+                    .url(HttpRoutes.BaseURL + incubNum)
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+            }
+            else{
+                request = Request.Builder()
+                    //.url("https://web.foodrus.ru/api/indications/JW2?start=2023-04-04T22:09:16&end=2023-04-04T22:17:16")
+                    .url(HttpRoutes.BaseURL + incubNum + HttpRoutes.PromTimeStart + promStart + HttpRoutes.PromTimeEnd + promEnd)
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+            }
+
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {

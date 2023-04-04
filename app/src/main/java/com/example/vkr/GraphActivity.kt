@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -23,7 +22,6 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
-import java.util.concurrent.Future
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
@@ -50,12 +48,18 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     lateinit var bindingClass: ActivityGraphBinding
     lateinit var chart: LineChart
     lateinit var chart2: LineChart
+    lateinit var incubNum: String
     var atemp = arrayListOf<Float>()
     var ahum = arrayListOf<Float>()
     var atime = arrayListOf<Float>()
+    var typeGraph = "RealTime"
+    var promStart = ""
+    var promEnd = ""
+
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
+        incubNum = intent.getStringExtra("incubNum") ?: ""
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
@@ -153,14 +157,21 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
         bindingClass.ParamButton.setOnClickListener {
             val intent = Intent(this, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "Error")
-            intent.putExtra("popuptext", "Sorry, that email address is already used!")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
 
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                typeGraph = data?.getStringExtra("typeGraph").toString()
+                promStart = data?.getStringExtra("promStart").toString()
+                promEnd = data?.getStringExtra("promEnd").toString()
+            }
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         executorService.shutdown()
@@ -174,7 +185,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         super.onResume()
         executorService = Executors.newSingleThreadScheduledExecutor()
         executorService.scheduleAtFixedRate({
-            Network.getData {
+            Network.getData(incubNum, typeGraph, promStart, promEnd) {
                 runOnUiThread(Runnable {
                     //Log.d("getData", it[0].toString())
                     var r: String = ""

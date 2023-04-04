@@ -2,9 +2,12 @@ package com.example.vkr
 
 object HttpRoutes {
 
-    private const val BASE_URL = "https://web.foodrus.ru/webdash"
-    const val INC1 = "$BASE_URL/JW1"
-    const val INC2 = "$BASE_URL/JW2"
-    const val INC3 = "$BASE_URL/JW3"
+    private const val REAL_TIME_BASE_URL = "https://web.foodrus.ru/api/indications/"
+    private const val PROM_TIME_START = "?start="
+    private const val PROM_TIME_END = "&end="
+
+    const val BaseURL = "$REAL_TIME_BASE_URL"
+    const val PromTimeStart = "$PROM_TIME_START"
+    const val PromTimeEnd = "$PROM_TIME_END"
 
 }
