@@ -43,20 +43,570 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/HT16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM8"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM8"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM8"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM8"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM8" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM8"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.153"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM9"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM9"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM9"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM9"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM9" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM9"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM10"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM10"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM10"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM10"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM10" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM10"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.292"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM11"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM11"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM11"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM11"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM11" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM11"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.359"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM12"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM12"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM12"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM12"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM12" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM12"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.427"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM13"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM13"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM13"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM13"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM13" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM13"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.495"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM14"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM14"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM14"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM14"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM14" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM14"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.566"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM7"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM7"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM7"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM7"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM7" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM7"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.153"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM6"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM6"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM6"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM6"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM6" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM6"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.223"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM5"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM5"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM5"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM5"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM5" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM5"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.292"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM4"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM4"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM4"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM4"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM4" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM4"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.359"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM3"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM3"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM3"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM3"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM3" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM3"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.427"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM2"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM2"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM2"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM2"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM2" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM2"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.495"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CM1"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonCM1"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonCM1"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonCM1"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonCM1" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonCM1"
+                android:layout_width="71dp"
+                android:layout_height="41dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.868"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.566"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT8"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT8"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT8"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT8"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT8" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT8"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.805"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.516"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT7"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT7"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT7"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT7"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT7" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT7"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.805"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT6"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT6"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT6"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT6"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT6" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT6"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.805"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.281"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT5"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT5"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT5"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT5"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT5" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT5"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.805"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.16"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT1"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT1"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT1"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT1"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT1" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT1"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.695"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.516"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT2"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT2"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT2"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT2"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT2" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT2"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.695"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT3"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/incubatorButtonHT3"
+                app:layout_constraintEnd_toEndOf="@id/incubatorButtonHT3"
+                app:layout_constraintStart_toStartOf="@id/incubatorButtonHT3"
+                app:layout_constraintTop_toTopOf="@id/incubatorButtonHT3" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT3"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.695"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.281"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
+                android:id="@+id/HT4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HT4"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonHT4"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonHT4"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonHT4"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonHT4" />
+
+            <ImageView
+                android:id="@+id/incubatorButtonHT4"
+                android:layout_width="79dp"
+                android:layout_height="71dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.695"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.16"
+                app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+            <TextView
                 android:id="@+id/JW6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/JW6"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton6"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton6"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW6"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW6"
                 app:layout_constraintHorizontal_bias="0.45"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton6"
-                app:layout_constraintTop_toTopOf="@+id/incubatorButton6"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW6"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW6"
                 app:layout_constraintVertical_bias="0.493" />
 
             <ImageView
-                android:id="@+id/incubatorButton6"
+                android:id="@+id/incubatorButtonJW6"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -75,14 +625,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/JW5"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton5"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton5"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton5"
-                app:layout_constraintTop_toTopOf="@+id/incubatorButton5"
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW5"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW5"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW5"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW5"
                 app:layout_constraintVertical_bias="0.493" />
 
             <ImageView
-                android:id="@+id/incubatorButton5"
+                android:id="@+id/incubatorButtonJW5"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -101,13 +651,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/JW4"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton4"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton4"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton4"
-                app:layout_constraintTop_toTopOf="@+id/incubatorButton4" />
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW4"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW4"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW4"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW4" />
 
             <ImageView
-                android:id="@+id/incubatorButton4"
+                android:id="@+id/incubatorButtonJW4"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -126,13 +676,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/JW3"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton3"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton3"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton3"
-                app:layout_constraintTop_toTopOf="@+id/incubatorButton3" />
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW3"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW3"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW3"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW3" />
 
             <ImageView
-                android:id="@+id/incubatorButton3"
+                android:id="@+id/incubatorButtonJW3"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -151,13 +701,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/JW2"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/incubatorButton2"
-                app:layout_constraintEnd_toEndOf="@+id/incubatorButton2"
-                app:layout_constraintStart_toStartOf="@+id/incubatorButton2"
-                app:layout_constraintTop_toTopOf="@+id/incubatorButton2" />
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW2"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW2"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW2"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW2" />
 
             <ImageView
-                android:id="@+id/incubatorButton2"
+                android:id="@+id/incubatorButtonJW2"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -176,13 +726,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/JW1"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/IncubatorButton1"
-                app:layout_constraintEnd_toEndOf="@+id/IncubatorButton1"
-                app:layout_constraintStart_toStartOf="@+id/IncubatorButton1"
-                app:layout_constraintTop_toTopOf="@+id/IncubatorButton1" />
+                app:layout_constraintBottom_toBottomOf="@+id/incubatorButtonJW1"
+                app:layout_constraintEnd_toEndOf="@+id/incubatorButtonJW1"
+                app:layout_constraintStart_toStartOf="@+id/incubatorButtonJW1"
+                app:layout_constraintTop_toTopOf="@+id/incubatorButtonJW1" />
 
             <ImageView
-                android:id="@+id/IncubatorButton1"
+                android:id="@+id/incubatorButtonJW1"
                 android:layout_width="48dp"
                 android:layout_height="100dp"
                 android:clickable="true"
@@ -197,8 +747,8 @@
 
             <ImageView
                 android:id="@+id/mapView"
-                android:layout_width="1200dp"
-                android:layout_height="932dp"
+                android:layout_width="1236dp"
+                android:layout_height="729dp"
                 android:layout_margin="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
