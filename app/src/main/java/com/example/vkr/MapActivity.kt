@@ -18,7 +18,17 @@ class MapActivity : AppCompatActivity() {
         bindingClass = ActivityMapBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-        bindingClass.BackButton.setOnClickListener {
+        bindingClass.logButton.setOnClickListener {
+            val intent = Intent(this, LogActivity::class.java)
+            startActivity(intent)
+        }
+
+        bindingClass.configButton.setOnClickListener {
+            val intent = Intent(this, ConfigActivity::class.java)
+            startActivity(intent)
+        }
+
+        bindingClass.backButton.setOnClickListener {
             finish()
         }
 

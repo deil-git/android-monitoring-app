@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ФудРус Мониторинг</string>
+    <string name="back">Назад</string>
+    <string name="logButton">Управление записями</string>
+    <string name="configButton">Конфигурация датчиков</string>
     <string name="GraphLabel">Температура °C, Влажность %</string>
     <string name="TimePickTitle">Выберите способ отображения графика</string>
     <string name="RealTime">В реальном времени</string>
