@@ -57,13 +57,15 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     var promEnd = ""
 
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         incubNum = intent.getStringExtra("incubNum") ?: ""
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
+        bindingClass.graphLabel.text = incubNum + " Температура °C, Влажность %"
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)
@@ -257,17 +259,17 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             // black lines and points
             set1.color = Color.GREEN
-            set1.setCircleColor(Color.GREEN)
+            set1.setCircleColor(Color.TRANSPARENT)
 
             set2.color = Color.BLUE
-            set2.setCircleColor(Color.BLUE)
+            set2.setCircleColor(Color.TRANSPARENT)
 
             // line thickness and point size
             set1.lineWidth = 1f
-            set1.circleRadius = 3f
+            set1.circleRadius = 1f
 
             set2.lineWidth = 1f
-            set2.circleRadius = 3f
+            set2.circleRadius = 1f
 
             // draw points as solid circles
             set1.setDrawCircleHole(false)
