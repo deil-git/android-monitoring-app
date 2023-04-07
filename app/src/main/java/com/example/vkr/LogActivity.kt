@@ -1,5 +1,6 @@
 package com.example.vkr
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -13,5 +14,10 @@ class LogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityLogBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
+        bindingClass.createButton.setOnClickListener {
+            val intent = Intent(this, LogCreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -4,19 +4,22 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.Window
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import com.example.vkr.databinding.ActivityPopUpWindowBinding
+import android.widget.DatePicker
+import android.widget.TimePicker
+import android.widget.Toast
+import androidx.core.view.get
+import com.example.vkr.databinding.ActivityLogBinding
+import com.example.vkr.databinding.ActivityLogCreateBinding
 import java.util.*
-import kotlin.properties.Delegates
 
-class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
-    TimePickerDialog.OnTimeSetListener {
-    lateinit var bindingClass: ActivityPopUpWindowBinding
+class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
+    TimePickerDialog.OnTimeSetListener  {
+    lateinit var bindingClass: ActivityLogCreateBinding
     var promStart = ""
     var promEnd = ""
     var ButtonNum = 0
@@ -44,11 +47,12 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        //overridePendingTransition(0, 0)
-        bindingClass = ActivityPopUpWindowBinding.inflate(layoutInflater)
+        bindingClass = ActivityLogCreateBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-        bindingClass.btnPick1.setOnClickListener {
+        //bindingClass.spinnerInc.get()
+        
+        bindingClass.btnPick.setOnClickListener {
             ButtonNum = 1
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -59,7 +63,7 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             datePickerDialog.show()
         }
 
-        bindingClass.btnPick2.setOnClickListener {
+        bindingClass.btnPick3.setOnClickListener {
             ButtonNum = 2
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -70,16 +74,9 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             datePickerDialog.show()
         }
 
-        bindingClass.btnRealTime.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("typeGraph", "RealTime")
-            setResult(RESULT_OK, intent)
-            finish()
-        }
-
-        bindingClass.btnPromTime.setOnClickListener {
+        bindingClass.saveButton.setOnClickListener {
             var Error: Boolean = false
-            if(bindingClass.TextTime1.text == "С: " ||  bindingClass.TextTime2.text == "До: "){
+            if(bindingClass.textTime.text == "С: " ||  bindingClass.textTime2.text == "До: "){
                 Toast.makeText(applicationContext,
                     "Выберите временной промежуток",
                     Toast.LENGTH_LONG).show()
@@ -137,6 +134,7 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             }
         }
     }
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myDay = dayOfMonth
         myYear = year
@@ -154,14 +152,14 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         myHour = hourOfDay
         myMinute = minute
         if(ButtonNum == 1) {
-            bindingClass.TextTime1.text = "С: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
+            bindingClass.textTime.text = "С: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
             myDay1 = myDay
             myMonth1 = myMonth
             myYear1 = myYear
             myHour1 = myHour
             myMinute1 = myMinute
-            } else{
-            bindingClass.TextTime2.text = "До: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
+        } else{
+            bindingClass.textTime2.text = "До: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
             myDay2 = myDay
             myMonth2 = myMonth
             myYear2 = myYear

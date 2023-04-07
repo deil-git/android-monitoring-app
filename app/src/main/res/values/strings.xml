@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">ФудРус Мониторинг</string>
     <string name="back">Назад</string>
+    <string name="create">Создать</string>
+    <string name="save">Сохранить</string>
     <string name="logButton">Управление записями</string>
     <string name="configButton">Конфигурация датчиков</string>
     <string name="GraphLabel">Температура °C, Влажность %</string>
+    <string name="LogLabel">Управление записями</string>
+    <string name="ConfigLabel">Конфигурация системы</string>
     <string name="TimePickTitle">Выберите способ отображения графика</string>
     <string name="RealTime">В реальном времени</string>
     <string name="PromTime">В промежутке времени</string>
@@ -36,4 +40,34 @@
     <string name="CM12">CM12</string>
     <string name="CM13">CM13</string>
     <string name="CM14">CM14</string>
+    <string-array name="Incubators">
+        <item>JW1</item>
+        <item>JW2</item>
+        <item>JW3</item>
+        <item>JW4</item>
+        <item>JW5</item>
+        <item>JW6</item>
+        <item>HT1</item>
+        <item>HT2</item>
+        <item>HT3</item>
+        <item>HT4</item>
+        <item>HT5</item>
+        <item>HT6</item>
+        <item>HT7</item>
+        <item>HT8</item>
+        <item>CM1</item>
+        <item>CM2</item>
+        <item>CM3</item>
+        <item>CM4</item>
+        <item>CM5</item>
+        <item>CM6</item>
+        <item>CM7</item>
+        <item>CM8</item>
+        <item>CM9</item>
+        <item>CM10</item>
+        <item>CM11</item>
+        <item>CM12</item>
+        <item>CM13</item>
+        <item>CM14</item>
+    </string-array>
 </resources>
