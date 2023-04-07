@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
+import com.example.vkr.network.Network
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LimitLine
@@ -90,6 +91,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         description.textSize = 24f
         description.text = ""
 
+        chart.setNoDataText("Нет доступной информации.")
 
         val xAxis = chart.xAxis
         chart.xAxis.valueFormatter = LineChartXAxisValueFormatter()

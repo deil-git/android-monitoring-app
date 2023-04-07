@@ -1,4 +1,4 @@
-package com.example.vkr
+package com.example.vkr.network
 
 import android.util.Log
 import com.google.gson.Gson

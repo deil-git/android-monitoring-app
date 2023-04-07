@@ -13,5 +13,6 @@ class ConfigActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityConfigBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
     }
 }
