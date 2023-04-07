@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         val mApp: MyApplication = this.application as MyApplication
 
-
         bindingClass.loginButton.setOnClickListener {
             var login = bindingClass.loginText.text.toString()
             mApp.login = login
