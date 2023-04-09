@@ -1,6 +1,9 @@
 package com.example.vkr.network
 
+import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import com.example.vkr.MapActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
@@ -15,7 +18,11 @@ open class Network {
 
     companion object {
         var token = ""
+        var login_g = ""
+        var password_g = ""
         fun tokenGet(login: String, password: String, onResult: (ServerResponse) -> Unit) {
+            login_g = login
+            password_g = password
             val client = OkHttpClient()
             val credential = Credentials.basic(login, password)
             val request = Request.Builder()
@@ -43,6 +50,8 @@ open class Network {
             val client = OkHttpClient()
             lateinit var request: Request
 
+            //token = "315"
+
             if(typeGraph == "RealTime"){
                 request = Request.Builder()
                     .url(HttpRoutes.BaseURL + incubNum)
@@ -66,10 +75,19 @@ open class Network {
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
                     val userType: Type = object : TypeToken<Vector<ServerResponse.Data?>?>() {}.type
-                    val userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
+//                    try {
+//                        var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
+//                    }
+//                    catch (e:Exception) {
+//                        Log.d("getDataError", e.toString())
+//                        tokenGet(login_g, password_g) {
+//                            token = it.token
+//                        }
+//                    }
+                    var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
                     //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
-
                     //Log.d("TOKEN", resp.token)
+                    Log.d("degub0", userList.toString())
                     onResult(userList)
                 }
             })
