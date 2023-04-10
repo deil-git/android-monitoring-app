@@ -1,4 +1,4 @@
-package com.example.vkr
+package com.example.vkr.network
 import java.util.Vector
 
 public final class ServerResponse constructor(_token: String = "", _error: String = ""){

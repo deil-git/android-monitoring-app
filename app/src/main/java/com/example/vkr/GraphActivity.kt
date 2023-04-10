@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
+import com.example.vkr.network.Network
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LimitLine
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 
@@ -43,28 +45,28 @@ class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
 }
 
 class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
+    lateinit var executorService: ScheduledExecutorService
     lateinit var bindingClass: ActivityGraphBinding
     lateinit var chart: LineChart
     lateinit var chart2: LineChart
+    lateinit var incubNum: String
     var atemp = arrayListOf<Float>()
     var ahum = arrayListOf<Float>()
     var atime = arrayListOf<Float>()
+    var typeGraph = "RealTime"
+    var promStart = ""
+    var promEnd = ""
 
-    @SuppressLint("SimpleDateFormat")
+
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        incubNum = intent.getStringExtra("incubNum") ?: ""
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-        bindingClass.ParamButton.setOnClickListener {
-            val intent = Intent(this, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "Error")
-            intent.putExtra("popuptext", "Sorry, that email address is already used!")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
-            startActivity(intent)
-        }
+        bindingClass.graphLabel.text = incubNum + " Температура °C, Влажность %"
 
         chart = findViewById(bindingClass.chart1.id)
         chart.setBackgroundColor(Color.WHITE)
@@ -89,6 +91,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         description.textSize = 24f
         description.text = ""
 
+        chart.setNoDataText("Нет доступной информации.")
 
         val xAxis = chart.xAxis
         chart.xAxis.valueFormatter = LineChartXAxisValueFormatter()
@@ -156,39 +159,62 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val legend2 = chart2.legend
         legend2.form = Legend.LegendForm.LINE
 
-
-
-
-
-        val executorService = Executors.newSingleThreadScheduledExecutor()
-        executorService.scheduleAtFixedRate({     Network.getData {
-            runOnUiThread(Runnable {
-                Log.d("getData", it[0].toString())
-                var r: String = ""
-                atemp.clear()
-                ahum.clear()
-                atime.clear()
-                for(d in it){
-
-                    atemp.add(d.temp)
-                    ahum.add(d.hum)
-
-                    val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
-                    val tm = d.time
-                    val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
-                    val date = format.parse(s)
-                    val floatTime = date.time.toFloat() / 1000
-                    atime.add(floatTime)
-                    r += "${d.temp} ${d.hum} ${floatTime} \n"
-                }
-                Log.d("getData", r)
-                setData()
-            })
-        }    }, 0, 5, TimeUnit.SECONDS)
+        bindingClass.ParamButton.setOnClickListener {
+            val intent = Intent(this, PopUpWindow::class.java)
+            startActivityForResult(intent, 1)
+        }
 
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                typeGraph = data?.getStringExtra("typeGraph").toString()
+                promStart = data?.getStringExtra("promStart").toString()
+                promEnd = data?.getStringExtra("promEnd").toString()
+            }
+        }
+    }
 
+    override fun onPause() {
+        super.onPause()
+        executorService.shutdown()
+    }
+    override fun onStop() {
+        super.onStop()
+        executorService.shutdown()
+    }
+    @SuppressLint("SimpleDateFormat")
+    override fun onResume() {
+        super.onResume()
+        executorService = Executors.newSingleThreadScheduledExecutor()
+        executorService.scheduleAtFixedRate({
+            Network.getData(incubNum, typeGraph, promStart, promEnd) {
+                runOnUiThread(Runnable {
+                    //Log.d("getData", it[0].toString())
+                    var r: String = ""
+                    atime.clear()
+                    atemp.clear()
+                    ahum.clear()
+                    for(d in it){
 
+                        atemp.add(d.temp)
+                        ahum.add(d.hum)
+
+                        val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
+                        val tm = d.time
+                        val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
+                        val date = format.parse(s)
+                        val floatTime = date.time.toFloat() / 1000
+                        atime.add(floatTime)
+                        r += "${d.temp} ${d.hum} ${floatTime} \n"
+                    }
+                    Log.d("getData", "итерация")
+                    setData()
+                })
+            }
+        }, 0, 5, TimeUnit.SECONDS)
+    }
 
     private fun setData() {
 
@@ -235,17 +261,17 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             // black lines and points
             set1.color = Color.GREEN
-            set1.setCircleColor(Color.GREEN)
+            set1.setCircleColor(Color.TRANSPARENT)
 
             set2.color = Color.BLUE
-            set2.setCircleColor(Color.BLUE)
+            set2.setCircleColor(Color.TRANSPARENT)
 
             // line thickness and point size
             set1.lineWidth = 1f
-            set1.circleRadius = 3f
+            set1.circleRadius = 1f
 
             set2.lineWidth = 1f
-            set2.circleRadius = 3f
+            set2.circleRadius = 1f
 
             // draw points as solid circles
             set1.setDrawCircleHole(false)
@@ -305,7 +331,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                 description.text = h.getY().toString() + "%"
             }
 
-            Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
+            //Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
         };
     }
 
