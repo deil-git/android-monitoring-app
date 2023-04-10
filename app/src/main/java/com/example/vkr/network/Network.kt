@@ -75,16 +75,19 @@ open class Network {
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
                     val userType: Type = object : TypeToken<Vector<ServerResponse.Data?>?>() {}.type
-//                    try {
-//                        var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
-//                    }
-//                    catch (e:Exception) {
-//                        Log.d("getDataError", e.toString())
-//                        tokenGet(login_g, password_g) {
-//                            token = it.token
-//                        }
-//                    }
-                    var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
+                    var userList: Vector<ServerResponse.Data> = Vector<ServerResponse.Data>()
+                    try {
+                        userList = gson.fromJson(response.body?.string(), userType)
+                    }
+                    catch (e:Exception) {
+                        Log.d("getDataError", e.toString())
+
+                        tokenGet(login_g, password_g) {
+                            token = it.token
+                        }
+                    }
+
+//                    var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
                     //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
                     //Log.d("TOKEN", resp.token)
                     Log.d("degub0", userList.toString())

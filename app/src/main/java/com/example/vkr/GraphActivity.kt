@@ -191,26 +191,29 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         executorService.scheduleAtFixedRate({
             Network.getData(incubNum, typeGraph, promStart, promEnd) {
                 runOnUiThread(Runnable {
-                    //Log.d("getData", it[0].toString())
-                    var r: String = ""
-                    atime.clear()
-                    atemp.clear()
-                    ahum.clear()
-                    for(d in it){
+                    if (!it.isEmpty()) {
+                        //Log.d("getData", it[0].toString())
+                        var r: String = ""
+                        atime.clear()
+                        atemp.clear()
+                        ahum.clear()
+                        for (d in it) {
 
-                        atemp.add(d.temp)
-                        ahum.add(d.hum)
+                            atemp.add(d.temp)
+                            ahum.add(d.hum)
 
-                        val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
-                        val tm = d.time
-                        val s:String = (tm[5].toString()+tm[6]+tm[7]+tm[8]+tm[9]+tm[10]+tm[11]+tm[12]+tm[13]+tm[14]+tm[15]+tm[16]+tm[17]+tm[18])
-                        val date = format.parse(s)
-                        val floatTime = date.time.toFloat() / 1000
-                        atime.add(floatTime)
-                        r += "${d.temp} ${d.hum} ${floatTime} \n"
+                            val format = SimpleDateFormat("MM-dd'T'HH:mm:ss")
+                            val tm = d.time
+                            val s: String =
+                                (tm[5].toString() + tm[6] + tm[7] + tm[8] + tm[9] + tm[10] + tm[11] + tm[12] + tm[13] + tm[14] + tm[15] + tm[16] + tm[17] + tm[18])
+                            val date = format.parse(s)
+                            val floatTime = date.time.toFloat() / 1000
+                            atime.add(floatTime)
+                            r += "${d.temp} ${d.hum} ${floatTime} \n"
+                        }
+                        Log.d("getData", "итерация")
+                        setData()
                     }
-                    Log.d("getData", "итерация")
-                    setData()
                 })
             }
         }, 0, 5, TimeUnit.SECONDS)
