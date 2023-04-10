@@ -19,16 +19,6 @@ typealias MyListener = (String) -> Unit
 class MainActivity : AppCompatActivity() {
     lateinit var bindingClass: ActivityMainBinding
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // FCM SDK (and your app) can post notifications.
-        } else {
-            // TODO:    УДАЛИТЬ?   УДАЛИТЬ?   УДАЛИТЬ?              Inform user that that your app will not show notifications.
-        }
-    }
-
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)

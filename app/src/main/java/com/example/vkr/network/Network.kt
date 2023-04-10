@@ -1,9 +1,6 @@
 package com.example.vkr.network
 
-import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import com.example.vkr.MapActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
@@ -52,14 +49,14 @@ open class Network {
 
             if(typeGraph == "RealTime"){
                 request = Request.Builder()
-                    .url(HttpRoutes.BaseURL + incubNum)
+                    .url(HttpRoutes.Indications + incubNum)
                     .addHeader("Authorization", "Bearer $token")
                     .build()
             }
             else{
                 request = Request.Builder()
                     //.url("https://web.foodrus.ru/api/indications/JW2?start=2023-04-04T22:09:16&end=2023-04-04T22:17:16")
-                    .url(HttpRoutes.BaseURL + incubNum + HttpRoutes.PromTimeStart + promStart + HttpRoutes.PromTimeEnd + promEnd)
+                    .url(HttpRoutes.Indications + incubNum + HttpRoutes.PromTimeStart + promStart + HttpRoutes.PromTimeEnd + promEnd)
                     .addHeader("Authorization", "Bearer $token")
                     .build()
             }
@@ -71,6 +68,7 @@ open class Network {
                     val gson = Gson()
                     val userType: Type = object : TypeToken<Vector<ServerResponse.Data?>?>() {}.type
                     var userList: Vector<ServerResponse.Data> = Vector<ServerResponse.Data>()
+
                     try {
                         userList = gson.fromJson(response.body?.string(), userType)
                     }
@@ -80,11 +78,41 @@ open class Network {
                             token = it.token
                         }
                     }
-
                     onResult(userList)
                 }
             })
         }
+
+        fun getDevices(onResult: (ServerResponse.AddressResponse) -> Unit) {
+            val client = OkHttpClient()
+
+            var request: Request = Request.Builder()
+                .url(HttpRoutes.Config)
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {
+                    val gson = Gson()
+                    val userType: Type = object : TypeToken<ServerResponse.AddressResponse?>() {}.type
+                    var userList: ServerResponse.AddressResponse = ServerResponse.AddressResponse()
+
+                    try {
+                        userList = gson.fromJson(response.body?.string(), userType)
+                    }
+                    catch (e:Exception) {
+                        Log.d("debug0", e.toString())
+                        tokenGet(login_g, password_g) {
+                            token = it.token
+                        }
+                    }
+                    onResult(userList)
+                }
+            })
+        }
+
 
         fun sendFCM(FCMtoken: String, onResult: (String) -> Unit) {
             val client = OkHttpClient()
