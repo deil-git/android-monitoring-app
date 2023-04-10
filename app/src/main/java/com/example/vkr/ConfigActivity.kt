@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -91,6 +93,22 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     stk.addView(tbrow1)
                 }
             }
+        }
+
+        val rba = findViewById<RadioButton>(R.id.radioButtonAdress)
+        rba.setOnClickListener {
+            val asc = findViewById<ScrollView>(R.id.adressScrollView)
+            asc.visibility = VISIBLE
+            val isc = findViewById<ScrollView>(R.id.infelicityScrollView)
+            isc.visibility = INVISIBLE
+        }
+
+        val rbi = findViewById<RadioButton>(R.id.radioButtonInfelicity)
+        rbi.setOnClickListener {
+            val asc = findViewById<ScrollView>(R.id.adressScrollView)
+            asc.visibility = INVISIBLE
+            val isc = findViewById<ScrollView>(R.id.infelicityScrollView)
+            isc.visibility = VISIBLE
         }
     }
 

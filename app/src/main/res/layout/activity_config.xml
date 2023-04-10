@@ -7,10 +7,12 @@
     tools:context=".ConfigActivity">
 
     <ScrollView
+        android:id="@+id/adressScrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="none"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,28 +61,116 @@
         </TableLayout>
     </ScrollView>
 
+    <ScrollView
+        android:id="@+id/infelicityScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveButton1">
+
+
+        <TableLayout
+            android:id="@+id/ConfigTable1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:padding="10dip">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView01"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="Тест"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView03"
+                    android:layout_width="73dp"
+                    android:layout_height="wrap_content"
+                    android:text="Тест"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView05"
+                    android:layout_width="222dp"
+                    android:layout_height="wrap_content"
+                    android:text="Тест"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
     <Button
         android:id="@+id/saveButton1"
         android:layout_width="149dp"
         android:layout_height="53dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#63C65F"
         android:text="@string/save"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/configLabel"
         app:layout_constraintStart_toStartOf="@+id/configLabel"
-        app:layout_constraintTop_toBottomOf="@+id/configLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
         android:id="@+id/configLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/LogLabel"
+        android:text="@string/ConfigLabel"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="279dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/configLabel"
+        app:layout_constraintStart_toStartOf="@+id/configLabel"
+        app:layout_constraintTop_toBottomOf="@+id/configLabel">
+
+        <RadioButton
+            android:id="@+id/radioButtonAdress"
+            style="@style/Widget.Material3.CompoundButton.RadioButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Адреса"
+            android:textColorHighlight="#4CAF50"
+            android:textColorLink="#8BC34A"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonInfelicity"
+            style="@style/Widget.Material3.CompoundButton.RadioButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Смещения"
+            android:textColorHighlight="#4CAF50"
+            android:textColorLink="#8BC34A"
+            android:textSize="14sp" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

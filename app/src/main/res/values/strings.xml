@@ -7,7 +7,7 @@
     <string name="configButton">Конфигурация датчиков</string>
     <string name="GraphLabel">Температура °C, Влажность %</string>
     <string name="LogLabel">Управление записями</string>
-    <string name="ConfigLabel">Конфигурация системы</string>
+    <string name="ConfigLabel">Конфигурация датчиков</string>
     <string name="TimePickTitle">Выберите способ отображения графика</string>
     <string name="RealTime">В реальном времени</string>
     <string name="PromTime">В промежутке времени</string>
