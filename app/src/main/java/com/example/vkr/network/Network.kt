@@ -50,8 +50,6 @@ open class Network {
             val client = OkHttpClient()
             lateinit var request: Request
 
-            //token = "315"
-
             if(typeGraph == "RealTime"){
                 request = Request.Builder()
                     .url(HttpRoutes.BaseURL + incubNum)
@@ -66,11 +64,8 @@ open class Network {
                     .build()
             }
 
-
             client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-
-                }
+                override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
@@ -81,16 +76,11 @@ open class Network {
                     }
                     catch (e:Exception) {
                         Log.d("getDataError", e.toString())
-
                         tokenGet(login_g, password_g) {
                             token = it.token
                         }
                     }
 
-//                    var userList: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), userType)
-                    //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
-                    //Log.d("TOKEN", resp.token)
-                    Log.d("degub0", userList.toString())
                     onResult(userList)
                 }
             })
@@ -129,26 +119,3 @@ open class Network {
 
     }
 }
-
-
-
-/*
-fun tokenGet(login: String, password: String) {
-    val client = OkHttpClient()
-    val credential = Credentials.basic(login, password)
-    val request = Request.Builder()
-        .url("https://web.foodrus.ru/api/tokens")
-        .addHeader("Authorization", credential)
-        .build()
-
-    client.newCall(request).enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {
-
-        }
-
-        override fun onResponse(call: Call, response: Response) {
-
-            Network.token = response.body()?.string().toString()
-        }
-    })
-}*/

@@ -192,7 +192,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             Network.getData(incubNum, typeGraph, promStart, promEnd) {
                 runOnUiThread(Runnable {
                     if (!it.isEmpty()) {
-                        //Log.d("getData", it[0].toString())
                         var r: String = ""
                         atime.clear()
                         atemp.clear()
@@ -212,6 +211,9 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                             r += "${d.temp} ${d.hum} ${floatTime} \n"
                         }
                         Log.d("getData", "итерация")
+                        setData()
+                    }
+                    else {
                         setData()
                     }
                 })
