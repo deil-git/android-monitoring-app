@@ -7,11 +7,15 @@ object HttpRoutes {
     private const val PROM_TIME_START = "?start="
     private const val PROM_TIME_END = "&end="
     private const val CONFIG = "config"
+    private const val TOKEN = "tokens"
+    private const val FCMTOKEN = "fcmtoken"
 
     const val Indications = "$BASE_URL$INDICATIONS"
     const val PromTimeStart = "$PROM_TIME_START"
     const val PromTimeEnd = "$PROM_TIME_END"
 
     const val Config = "$BASE_URL$CONFIG"
+    const val FCMtoken = "$BASE_URL$FCMTOKEN"
+    const val Token = "$BASE_URL$TOKEN"
 
 }

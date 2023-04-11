@@ -30,7 +30,7 @@ open class Network {
             val client = OkHttpClient()
             val credential = Credentials.basic(login, password)
             val request = Request.Builder()
-                .url("https://web.foodrus.ru/api/tokens")
+                .url(HttpRoutes.Token)
                 .addHeader("Authorization", credential)
                 .build()
 
@@ -131,7 +131,7 @@ open class Network {
             )
 
             val request = Request.Builder()
-                .url("https://web.foodrus.ru/api/fcmtoken")
+                .url(HttpRoutes.FCMtoken)
                 .addHeader("Authorization", "Bearer $token")
                 .post(body)
                 .build()
@@ -154,9 +154,6 @@ open class Network {
         fun sendConfig(data: MutableList<ConfigStruct>, onResult: (String) -> Unit){
             val gson = Gson()
             var dataList = gson.toJson(mapOf("data" to data))
-//            var dataInData = JSONObject(mapOf("data" to dataList)).toString()
-            //var dataInData = JSONObject(dataMap).toString()
-
             val client = OkHttpClient()
 
 
@@ -172,9 +169,7 @@ open class Network {
                 .build()
 
             client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-
-                }
+                override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
 
@@ -185,11 +180,8 @@ open class Network {
                 }
             })
 
-
             Log.d("debug0", dataList.toString());
 
         }
-
-
     }
 }

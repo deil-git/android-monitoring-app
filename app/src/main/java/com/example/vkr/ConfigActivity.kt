@@ -36,7 +36,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         Network.getDevices {
             runOnUiThread {
                 var r: String = ""
-                var NEW_SPINNER_ID = 0
 
                 for (d in it.addresses) {
                     abox_id.add(d.box_id)
@@ -84,7 +83,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     t3v.textSize = 20F
                     tbrow.addView(t3v)
                     val sp = Spinner(this)
-
                     var aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, adev_list)
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     with(sp) {
@@ -92,7 +90,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         onItemSelectedListener = this@ConfigActivity
                     }
                     sp.id = abox_id[i]
-
                     stk.addView(tbrow)
                     stk.addView(sp)
                     stk.addView(tbrow1)
@@ -123,8 +120,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             for(i in 0 until abox_id.size) {
                 data.add(i, ConfigStruct(abox_id[i], aaddress[i]))
-
-//                data[abox_name[i]] = aaddress[i]
             }
 
             Network.sendConfig(data){
@@ -150,6 +145,4 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             "Ничего не выбрано",
             Toast.LENGTH_LONG).show()
     }
-
-
 }
