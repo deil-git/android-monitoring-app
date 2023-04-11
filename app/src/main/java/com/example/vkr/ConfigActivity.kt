@@ -1,7 +1,9 @@
 package com.example.vkr
 
+import android.accounts.NetworkErrorException
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.media.audiofx.DynamicsProcessing.Config
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +12,8 @@ import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import com.example.vkr.data_structs.ConfigStruct
 import com.example.vkr.network.Network
 
 
@@ -26,6 +30,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
+
 
 
         Network.getDevices {
@@ -79,15 +84,15 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     t3v.textSize = 20F
                     tbrow.addView(t3v)
                     val sp = Spinner(this)
-                    NEW_SPINNER_ID += 1
+
                     var aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, adev_list)
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     with(sp) {
                         adapter = aa
                         onItemSelectedListener = this@ConfigActivity
                     }
-                    sp.id = NEW_SPINNER_ID
-                    tbrow1.tag = NEW_SPINNER_ID
+                    sp.id = abox_id[i]
+
                     stk.addView(tbrow)
                     stk.addView(sp)
                     stk.addView(tbrow1)
@@ -110,12 +115,34 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val isc = findViewById<ScrollView>(R.id.infelicityScrollView)
             isc.visibility = VISIBLE
         }
+
+        val saveButtonClick = findViewById<Button>(R.id.saveButton1)
+        saveButtonClick.setOnClickListener {
+            val data:MutableList<ConfigStruct> = arrayListOf()
+
+
+            for(i in 0 until abox_id.size) {
+                data.add(i, ConfigStruct(abox_id[i], aaddress[i]))
+
+//                data[abox_name[i]] = aaddress[i]
+            }
+
+            Network.sendConfig(data){
+                runOnUiThread {
+                    Log.d("response", it)
+                }
+            }
+        }
+
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Toast.makeText(applicationContext,
             "Выбран :${parent!!.id} и ${adev_list[position]}",
             Toast.LENGTH_LONG).show()
+
+        aaddress[parent!!.id-1] = adev_list[position]
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -123,4 +150,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             "Ничего не выбрано",
             Toast.LENGTH_LONG).show()
     }
+
+
 }

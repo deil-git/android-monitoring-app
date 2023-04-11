@@ -1,17 +1,24 @@
 package com.example.vkr.network
 
 import android.util.Log
+import com.example.vkr.data_structs.ConfigStruct
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.IOException
 import java.lang.reflect.Type
 import java.util.*
+import kotlin.collections.Collection
 
 
 open class Network {
 
+    val JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
 
     companion object {
         var token = ""
@@ -142,6 +149,45 @@ open class Network {
                     onResult(res)
                 }
             })
+        }
+
+        fun sendConfig(data: MutableList<ConfigStruct>, onResult: (String) -> Unit){
+            val gson = Gson()
+            var dataList = gson.toJson(mapOf("data" to data))
+//            var dataInData = JSONObject(mapOf("data" to dataList)).toString()
+            //var dataInData = JSONObject(dataMap).toString()
+
+            val client = OkHttpClient()
+
+
+
+            val body: RequestBody = RequestBody.create(
+                "application/json".toMediaTypeOrNull(), dataList
+            )
+
+            val request = Request.Builder()
+                .url("https://web.foodrus.ru/api/config/replace")
+                .addHeader("Authorization", "Bearer $token")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
+                    val res = response.body?.string().toString()
+                    Log.d("debug0", res)
+                    onResult(res)
+                }
+            })
+
+
+            Log.d("debug0", dataList.toString());
+
         }
 
 

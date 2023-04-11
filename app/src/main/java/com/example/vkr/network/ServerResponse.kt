@@ -26,4 +26,8 @@ public final class ServerResponse constructor(_token: String = "", _error: Strin
         var box_name = _box_name
     }
 
+
+
+
+
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
 import com.example.vkr.databinding.ActivityMapBinding
+import com.example.vkr.network.Network
 
 class MapActivity : AppCompatActivity() {
     lateinit var bindingClass: ActivityMapBinding
@@ -25,7 +26,11 @@ class MapActivity : AppCompatActivity() {
 
         bindingClass.configButton.setOnClickListener {
             val intent = Intent(this, ConfigActivity::class.java)
+            Network.getDevices {
+
+            }
             startActivity(intent)
+
         }
 
         bindingClass.backButton.setOnClickListener {
