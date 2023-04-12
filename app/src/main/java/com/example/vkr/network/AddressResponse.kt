@@ -1,5 +1,4 @@
 package com.example.vkr.network
-
 import java.util.*
 
 public class AddressResponse constructor(){

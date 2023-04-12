@@ -17,9 +17,6 @@ import kotlin.collections.Collection
 
 
 open class Network {
-
-    val JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
-
     companion object {
         var token = ""
         var login_g = ""
@@ -36,7 +33,7 @@ open class Network {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.d("TOKEN", e.toString())
+                    Log.d("tokenGetError", e.toString())
                 }
 
                 override fun onResponse(call: Call, response: Response) {
@@ -62,7 +59,6 @@ open class Network {
             }
             else{
                 request = Request.Builder()
-                    //.url("https://web.foodrus.ru/api/indications/JW2?start=2023-04-04T22:09:16&end=2023-04-04T22:17:16")
                     .url(HttpRoutes.Indications + incubNum + HttpRoutes.PromTimeStart + promStart + HttpRoutes.PromTimeEnd + promEnd)
                     .addHeader("Authorization", "Bearer $token")
                     .build()
@@ -108,15 +104,10 @@ open class Network {
 
                     try {
                         var s = response.body?.string()
-                        Log.d("debug0", "resp=" + s)
                         userList = gson.fromJson(s, userType)
-                        Log.d("debug0", "Start getDEV")
-                        for(d in userList.addresses){
-                            Log.d("debug0", "GetDev="+d.address)
-                        }
                     }
                     catch (e:Exception) {
-                        Log.d("debug0", e.toString())
+                        Log.d("getDevicesError", e.toString())
                         tokenGet(login_g, password_g) {
                             token = it.token
                         }
@@ -125,7 +116,6 @@ open class Network {
                 }
             })
         }
-
 
         fun sendFCM(FCMtoken: String, onResult: (String) -> Unit) {
             val client = OkHttpClient()
@@ -143,13 +133,9 @@ open class Network {
                 .build()
 
             client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-
-                }
+                override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
-
-                    //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
                     val res = response.body?.string().toString()
                     Log.d("FTOKEN", res)
                     onResult(res)
@@ -159,10 +145,8 @@ open class Network {
 
         fun sendConfig(data: MutableList<ConfigStruct>, onResult: (String) -> Unit){
             val gson = Gson()
-            var dataList = gson.toJson(mapOf("data" to data))
+            var dataList = gson.toJson(mapOf("box" to data))
             val client = OkHttpClient()
-
-
 
             val body: RequestBody = RequestBody.create(
                 "application/json".toMediaTypeOrNull(), dataList
@@ -178,16 +162,10 @@ open class Network {
                 override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
-
-                    //val resp: Vector<ServerResponse.Data> = gson.fromJson(response.body?.string(), Vector<ServerResponse.Data::class.java>)
                     val res = response.body?.string().toString()
-                    Log.d("debug0", res)
                     onResult(res)
                 }
             })
-
-            Log.d("debug0", dataList.toString());
-
         }
     }
 }

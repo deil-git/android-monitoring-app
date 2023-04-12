@@ -1,11 +1,8 @@
 package com.example.vkr
 
-import android.accounts.NetworkErrorException
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.media.audiofx.DynamicsProcessing.Config
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -13,12 +10,8 @@ import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.example.vkr.data_structs.ConfigStruct
 import com.example.vkr.network.Network
-import kotlinx.coroutines.delay
-import okhttp3.internal.wait
-
 
 class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var abox_id = arrayListOf<Int>()
@@ -26,18 +19,13 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var abox_name = arrayListOf<String>()
     var adev_list = arrayListOf<String>()
 
-
-
     @SuppressLint("SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
-
-
         Network.getDevices {
-
             var r: String = ""
 
             for (d in it.addresses) {
@@ -52,7 +40,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 r += "${d} \n"
             }
 
-            Log.d("debug0", r)
+            Log.d("Result", r)
             runOnUiThread {
 
                 val stk = findViewById<View>(R.id.ConfigTable) as TableLayout
@@ -76,7 +64,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     t2v.textSize = 20F
                     tbrow.addView(t2v)
                     val t3v = TextView(this)
-                    t3v.id = abox_id[i]
+                    t3v.id = abox_id[i] + 100
                     if (aaddress[i] != null) {
                         t3v.text = aaddress[i]
                     }
@@ -121,57 +109,45 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         saveButtonClick.setOnClickListener {
             val data:MutableList<ConfigStruct> = arrayListOf()
 
-
             for(i in 0 until abox_id.size) {
                 data.add(i, ConfigStruct(abox_id[i], aaddress[i]))
             }
-            Log.d("debug0", "Это начало  отправка")
+
             Network.sendConfig(data){
-
-
                 Network.getDevices {
+                    runOnUiThread{
 
-                    aaddress.clear()
-                    for (d in it.addresses) {
-                        if(d.address == null){
-                            aaddress.add("None")
+                        aaddress.clear()
 
+                        for (d in it.addresses) {
+                            if(d.address == null){
+                                aaddress.add("None")
+                            }
+                            else{
+                                aaddress.add(d.address)
+                            }
                         }
-                        else{
-                            aaddress.add(d.address)
 
+                        for (i in 1 until aaddress.size+1) {
+                            val adr = findViewById<TextView>(i + 100)
+                            if (aaddress[i-1] != null) {
+                                adr.text = aaddress[i-1]
+                            }
+                            else {
+                                adr.text = "None"
+                            }
+                            val sp = findViewById<Spinner>(i)
+                            sp.setSelection(0)
                         }
 
                     }
-
-
-
-
-
-                    for (i in 1 until aaddress.size+1) {
-                        val adr = findViewById<TextView>(i)
-                        if (aaddress[i-1] != null) {
-                            adr.text = aaddress[i-1]
-                        }
-                        else {
-                            adr.text = "None"
-                        }
-                    }
-
                 }
+
             }
-
-
         }
-
-
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Toast.makeText(applicationContext,
-            "Выбран :${parent!!.id} и ${adev_list[position]}",
-            Toast.LENGTH_LONG).show()
-
         aaddress[parent!!.id-1] = adev_list[position]
     }
 
