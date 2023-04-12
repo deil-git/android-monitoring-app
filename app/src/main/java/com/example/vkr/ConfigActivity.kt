@@ -25,7 +25,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
@@ -73,6 +73,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     t2v.textSize = 20F
                     tbrow.addView(t2v)
                     val t3v = TextView(this)
+                    t3v.id = abox_id[i]
                     if (aaddress[i] != null) {
                         t3v.text = aaddress[i]
                     }
@@ -123,9 +124,32 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
 
             Network.sendConfig(data){
-                runOnUiThread {
-                    Log.d("response", it)
-                }
+//                runOnUiThread {
+//                    Log.d("response", it)
+//                }
+            }
+
+
+            Network.getDevices {
+
+                    aaddress.clear()
+                    for (d in it.addresses) {
+                        aaddress.add(d.address)
+                        Log.d("debug0", d.address + "1111111")
+                    }
+
+
+
+                    for (i in 0 until aaddress.size) {
+//                        val adr = findViewById<TextView>(i)
+//                        if (aaddress[i] != null) {
+//                            adr.text = aaddress[i]
+//                        }
+//                        else {
+//                            adr.text = "None"
+//                        }
+                    }
+
             }
         }
 
