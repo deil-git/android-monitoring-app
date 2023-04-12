@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.media.audiofx.DynamicsProcessing.Config
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import com.example.vkr.data_structs.ConfigStruct
 import com.example.vkr.network.Network
+import kotlinx.coroutines.delay
+import okhttp3.internal.wait
 
 
 class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -34,23 +37,23 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
         Network.getDevices {
+
+            var r: String = ""
+
+            for (d in it.addresses) {
+                abox_id.add(d.box_id)
+                aaddress.add(d.address)
+                abox_name.add(d.box_name)
+                r += "${d.box_id} ${d.address} ${d.box_name} \n"
+            }
+
+            for (d in it.dev_list) {
+                adev_list.add(d)
+                r += "${d} \n"
+            }
+
+            Log.d("debug0", r)
             runOnUiThread {
-                var r: String = ""
-
-                for (d in it.addresses) {
-                    abox_id.add(d.box_id)
-                    aaddress.add(d.address)
-                    abox_name.add(d.box_name)
-                    r += "${d.box_id} ${d.address} ${d.box_name} \n"
-                }
-
-                for (d in it.dev_list) {
-                    adev_list.add(d)
-                    r += "${d} \n"
-                }
-
-                Log.d("debug0", r)
-
 
                 val stk = findViewById<View>(R.id.ConfigTable) as TableLayout
 
@@ -122,35 +125,43 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             for(i in 0 until abox_id.size) {
                 data.add(i, ConfigStruct(abox_id[i], aaddress[i]))
             }
-
+            Log.d("debug0", "Это начало  отправка")
             Network.sendConfig(data){
-//                runOnUiThread {
-//                    Log.d("response", it)
-//                }
-            }
 
 
-            Network.getDevices {
+                Network.getDevices {
 
                     aaddress.clear()
                     for (d in it.addresses) {
-                        aaddress.add(d.address)
-                        Log.d("debug0", d.address + "1111111")
+                        if(d.address == null){
+                            aaddress.add("None")
+
+                        }
+                        else{
+                            aaddress.add(d.address)
+
+                        }
+
                     }
 
 
 
-                    for (i in 0 until aaddress.size) {
-//                        val adr = findViewById<TextView>(i)
-//                        if (aaddress[i] != null) {
-//                            adr.text = aaddress[i]
-//                        }
-//                        else {
-//                            adr.text = "None"
-//                        }
+
+
+                    for (i in 1 until aaddress.size+1) {
+                        val adr = findViewById<TextView>(i)
+                        if (aaddress[i-1] != null) {
+                            adr.text = aaddress[i-1]
+                        }
+                        else {
+                            adr.text = "None"
+                        }
                     }
 
+                }
             }
+
+
         }
 
 
@@ -168,5 +179,23 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         Toast.makeText(applicationContext,
             "Ничего не выбрано",
             Toast.LENGTH_LONG).show()
+    }
+
+    override fun onStop(){
+        super.onStop()
+
+        this.finish()
+    }
+
+    override fun onPause(){
+        super.onPause()
+
+        this.finish()
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+
+        this.finish()
     }
 }

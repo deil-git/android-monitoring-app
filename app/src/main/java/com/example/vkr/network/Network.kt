@@ -90,7 +90,7 @@ open class Network {
             })
         }
 
-        fun getDevices(onResult: (ServerResponse.AddressResponse) -> Unit) {
+        fun getDevices(onResult: (AddressResponse) -> Unit) {
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -103,11 +103,17 @@ open class Network {
 
                 override fun onResponse(call: Call, response: Response) {
                     val gson = Gson()
-                    val userType: Type = object : TypeToken<ServerResponse.AddressResponse?>() {}.type
-                    var userList: ServerResponse.AddressResponse = ServerResponse.AddressResponse()
+                    val userType: Type = object : TypeToken<AddressResponse?>() {}.type
+                    var userList: AddressResponse = AddressResponse()
 
                     try {
-                        userList = gson.fromJson(response.body?.string(), userType)
+                        var s = response.body?.string()
+                        Log.d("debug0", "resp=" + s)
+                        userList = gson.fromJson(s, userType)
+                        Log.d("debug0", "Start getDEV")
+                        for(d in userList.addresses){
+                            Log.d("debug0", "GetDev="+d.address)
+                        }
                     }
                     catch (e:Exception) {
                         Log.d("debug0", e.toString())

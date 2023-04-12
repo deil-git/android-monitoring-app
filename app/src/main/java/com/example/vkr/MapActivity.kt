@@ -26,9 +26,7 @@ class MapActivity : AppCompatActivity() {
 
         bindingClass.configButton.setOnClickListener {
             val intent = Intent(this, ConfigActivity::class.java)
-            Network.getDevices {
 
-            }
             startActivity(intent)
 
         }
