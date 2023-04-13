@@ -143,6 +143,37 @@ open class Network {
             })
         }
 
+        fun getLogs(onResult: (LogResponce) -> Unit) {
+            val client = OkHttpClient()
+
+            var request: Request = Request.Builder()
+                .url(HttpRoutes.Logs)
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {
+                    val gson = Gson()
+                    val userType: Type = object : TypeToken<LogResponce?>() {}.type
+                    var userList: LogResponce = LogResponce()
+
+                    try {
+                        var s = response.body?.string()
+                        userList = gson.fromJson(s, userType)
+                    }
+                    catch (e:Exception) {
+                        Log.d("getDevicesError", e.toString())
+                        tokenGet(login_g, password_g) {
+                            token = it.token
+                        }
+                    }
+                    onResult(userList)
+                }
+            })
+        }
+
         fun sendFCM(FCMtoken: String, onResult: (String) -> Unit) {
             val client = OkHttpClient()
 

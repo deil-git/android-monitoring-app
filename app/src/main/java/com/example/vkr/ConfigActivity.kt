@@ -2,6 +2,7 @@ package com.example.vkr
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.vkr.data_structs.ConfigStruct
 import com.example.vkr.network.Network
 
@@ -48,7 +50,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             Log.d("Result", r)
 
             runOnUiThread {
-
                 val stk = findViewById<View>(R.id.ConfigTable) as TableLayout
 
                 for (i in 0 until abox_id.size) {
@@ -136,25 +137,28 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     ct.text = "Коррекция, °C"
                     ct.setTextColor(Color.BLACK)
                     ct.textSize = 20F
+                    ct.setTypeface(null, Typeface.BOLD)
                     tbrow2.addView(ct)
                     val et1 = EditText(this)
                     et1.hint = dcorrect_t[i].toString()
                     et1.id = did[i] + 1000
                     et1.setRawInputType(InputType.TYPE_CLASS_NUMBER)
                     et1.setText(dcorrect_t[i].toString())
+                    et1.background.setTint(ContextCompat.getColor(this, R.color.foodrus))
                     tbrow2.addView(et1)
                     stk.addView(tbrow2)
                     val ht = TextView(this)
                     ht.text = "Коррекция, %"
-
                     ht.setTextColor(Color.BLACK)
                     ht.textSize = 20F
+                    ht.setTypeface(null, Typeface.BOLD)
                     tbrow3.addView(ht)
                     val et2 = EditText(this)
                     et2.hint = dcorrect_h[i].toString()
                     et2.id = did[i] + 10000
                     et2.setRawInputType(InputType.TYPE_CLASS_NUMBER)
                     et2.setText(dcorrect_h[i].toString())
+                    et2.background.setTint(ContextCompat.getColor(this, R.color.foodrus))
                     tbrow3.addView(et2)
                     stk.addView(tbrow3)
                 }

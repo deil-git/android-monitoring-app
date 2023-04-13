@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="red">#E13D3D</color>
     <color name="foodrus">#63C65F</color>
     <color name="dark_foodrus">#4F9E4C</color>
     <color name="purple_200">#FFBB86FC</color>
