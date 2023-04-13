@@ -131,7 +131,6 @@ open class Network {
                     try {
                         var s = response.body?.string()
                         userList = gson.fromJson(s, userType)
-                        Log.d("debug0", s.toString())
                     }
                     catch (e:Exception) {
                         Log.d("getDevicesError", e.toString())

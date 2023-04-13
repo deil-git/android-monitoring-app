@@ -4,10 +4,10 @@ import java.util.*
 public class DeviceResponce constructor(){
     var device_list = Vector<Device>()
 
-    public class Device constructor(_box_id: Int = 0, _address: String = "", _correction_t: Float = 0f, _correction_h: Float = 0f){
-        var box_id = _box_id
+    public class Device constructor(_id: Int = 0, _address: String = "", _correct_t: Float = 0f, _correct_h: Float = 0f){
+        var id = _id
         var address = _address
-        var correction_t = _correction_t
-        var correction_h = _correction_h
+        var correct_t = _correct_t
+        var correct_h = _correct_h
     }
 }

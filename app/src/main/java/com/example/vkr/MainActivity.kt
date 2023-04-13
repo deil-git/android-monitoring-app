@@ -83,5 +83,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
+
+        bindingClass.DELETEME2.setOnClickListener {
+            bindingClass.loginText.setText("Artemiy")
+            bindingClass.passwordText.setText("123")
+        }
     }
 }

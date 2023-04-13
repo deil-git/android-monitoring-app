@@ -3,6 +3,7 @@ package com.example.vkr
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -18,6 +19,10 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var aaddress = arrayListOf<String>()
     var abox_name = arrayListOf<String>()
     var adev_list = arrayListOf<String>()
+    var did = arrayListOf<Int>()
+    var daddress = arrayListOf<String>()
+    var dcorrect_t = arrayListOf<Float>()
+    var dcorrect_h = arrayListOf<Float>()
 
     @SuppressLint("SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +46,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
 
             Log.d("Result", r)
+
             runOnUiThread {
 
                 val stk = findViewById<View>(R.id.ConfigTable) as TableLayout
@@ -89,6 +95,72 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
 
+        Network.getDevices {
+            var r: String = ""
+
+            for (d in it.device_list) {
+                did.add(d.id)
+                daddress.add(d.address)
+                dcorrect_t.add(d.correct_t)
+                dcorrect_h.add(d.correct_h)
+                r += "${d.id} ${d.address} ${d.correct_t} ${d.correct_h}\n"
+            }
+
+            Log.d("Result", r)
+
+            runOnUiThread {
+
+                val stk = findViewById<View>(R.id.SensorTable) as TableLayout
+
+                for (i in 0 until did.size) {
+                    val tbrow = TableRow(this)
+                    val space = TextView(this)
+                    space.setTextColor(Color.WHITE)
+                    stk.addView(space)
+                    stk.addView(tbrow)
+                    val tbrow1 = TableRow(this)
+                    val tbrow2 = TableRow(this)
+                    val tbrow3 = TableRow(this)
+                    val t1v = TextView(this)
+                    t1v.text = did[i].toString()
+                    t1v.setTextColor(Color.BLACK)
+                    t1v.textSize = 20F
+                    tbrow1.addView(t1v)
+                    val t2v = TextView(this)
+                    t2v.text = daddress[i]
+                    t2v.setTextColor(Color.BLACK)
+                    t2v.textSize = 20F
+                    tbrow1.addView(t2v)
+                    stk.addView(tbrow1)
+                    val ct = TextView(this)
+                    ct.text = "Коррекция, °C"
+                    ct.setTextColor(Color.BLACK)
+                    ct.textSize = 20F
+                    tbrow2.addView(ct)
+                    val et1 = EditText(this)
+                    et1.hint = dcorrect_t[i].toString()
+                    et1.id = did[i] + 1000
+                    et1.setRawInputType(InputType.TYPE_CLASS_NUMBER)
+                    et1.setText(dcorrect_t[i].toString())
+                    tbrow2.addView(et1)
+                    stk.addView(tbrow2)
+                    val ht = TextView(this)
+                    ht.text = "Коррекция, %"
+
+                    ht.setTextColor(Color.BLACK)
+                    ht.textSize = 20F
+                    tbrow3.addView(ht)
+                    val et2 = EditText(this)
+                    et2.hint = dcorrect_h[i].toString()
+                    et2.id = did[i] + 10000
+                    et2.setRawInputType(InputType.TYPE_CLASS_NUMBER)
+                    et2.setText(dcorrect_h[i].toString())
+                    tbrow3.addView(et2)
+                    stk.addView(tbrow3)
+                }
+            }
+        }
+
         val rba = findViewById<RadioButton>(R.id.radioButtonAdress)
         rba.setOnClickListener {
             val asc = findViewById<ScrollView>(R.id.adressScrollView)
@@ -116,7 +188,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             Network.sendConfig(data){
                 Network.getAddress {
                     runOnUiThread{
-
                         aaddress.clear()
 
                         for (d in it.addresses) {
@@ -139,15 +210,21 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             val sp = findViewById<Spinner>(i)
                             sp.setSelection(0)
                         }
+
+
+                        val et1 = findViewById<EditText>(1 + 1000)
+                        val et2 = findViewById<EditText>(1 + 10000)
+                        if(et1.text.isNotEmpty()){
+                            Log.d("debug0", et1.text.toString())
+                        }
+                        if(et2.text.isNotEmpty()){
+                            Log.d("debug0", et2.text.toString())
+                        }
                     }
                 }
             }
 
-            Network.getDevices {
-                for (d in it.device_list) {
-                    Log.d("debug0", d.address + d.box_id + d.correction_t + d.correction_h)
-                }
-            }
+
 
         }
     }
