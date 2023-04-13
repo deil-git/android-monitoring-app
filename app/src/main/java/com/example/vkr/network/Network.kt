@@ -3,17 +3,12 @@ package com.example.vkr.network
 import android.util.Log
 import com.example.vkr.data_structs.ConfigStruct
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
-import okhttp3.Headers.Companion.toHeaders
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.IOException
 import java.lang.reflect.Type
 import java.util.*
-import kotlin.collections.Collection
 
 
 open class Network {
@@ -86,7 +81,7 @@ open class Network {
             })
         }
 
-        fun getDevices(onResult: (AddressResponse) -> Unit) {
+        fun getAddress(onResult: (AddressResponse) -> Unit) {
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -105,6 +100,38 @@ open class Network {
                     try {
                         var s = response.body?.string()
                         userList = gson.fromJson(s, userType)
+                    }
+                    catch (e:Exception) {
+                        Log.d("getAddressError", e.toString())
+                        tokenGet(login_g, password_g) {
+                            token = it.token
+                        }
+                    }
+                    onResult(userList)
+                }
+            })
+        }
+
+        fun getDevices(onResult: (DeviceResponce) -> Unit) {
+            val client = OkHttpClient()
+
+            var request: Request = Request.Builder()
+                .url(HttpRoutes.Devices)
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {
+                    val gson = Gson()
+                    val userType: Type = object : TypeToken<DeviceResponce?>() {}.type
+                    var userList: DeviceResponce = DeviceResponce()
+
+                    try {
+                        var s = response.body?.string()
+                        userList = gson.fromJson(s, userType)
+                        Log.d("debug0", s.toString())
                     }
                     catch (e:Exception) {
                         Log.d("getDevicesError", e.toString())

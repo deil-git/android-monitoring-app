@@ -25,7 +25,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
-        Network.getDevices {
+        Network.getAddress {
             var r: String = ""
 
             for (d in it.addresses) {
@@ -114,7 +114,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
 
             Network.sendConfig(data){
-                Network.getDevices {
+                Network.getAddress {
                     runOnUiThread{
 
                         aaddress.clear()
@@ -139,11 +139,16 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             val sp = findViewById<Spinner>(i)
                             sp.setSelection(0)
                         }
-
                     }
                 }
-
             }
+
+            Network.getDevices {
+                for (d in it.device_list) {
+                    Log.d("debug0", d.address + d.box_id + d.correction_t + d.correction_h)
+                }
+            }
+
         }
     }
 
