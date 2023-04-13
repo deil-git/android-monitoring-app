@@ -8,17 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.View
 import android.view.Window
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.get
 import com.example.vkr.databinding.ActivityLogBinding
 import com.example.vkr.databinding.ActivityLogCreateBinding
+import com.example.vkr.network.Network
 import java.util.*
 
 class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
-    TimePickerDialog.OnTimeSetListener  {
+    TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
     lateinit var bindingClass: ActivityLogCreateBinding
     var promStart = ""
     var promEnd = ""
@@ -43,6 +43,7 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     var myYear2: Int = 0
     var myHour2: Int = 0
     var myMinute2: Int = 0
+    var bboxes = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -50,8 +51,25 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         bindingClass = ActivityLogCreateBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
-        //bindingClass.spinnerInc.get()
-        
+        Network.getBoxes {
+            var r: String = ""
+
+            for (d in it.boxes) {
+                bboxes.add(d.name)
+                r += "${d.name}\n"
+            }
+
+            Log.d("Result", r)
+        }
+
+        var aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, bboxes)
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        with(bindingClass.spinnerInc) {
+            adapter = aa
+            onItemSelectedListener = this@LogCreateActivity
+        }
+        //bindingClass.spinnerInc.setSelection(0)
+
         bindingClass.btnPick.setOnClickListener {
             ButtonNum = 1
             val calendar: Calendar = Calendar.getInstance()
@@ -201,5 +219,18 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         promStart = myYear1.toString() + "-" + myMonth1s + "-" + myDay1s + "T" + myHour1s + ":" + myMinute1s + ":00"
         promEnd = myYear2.toString() + "-" + myMonth2s + "-" + myDay2s + "T" + myHour2s + ":" + myMinute2s + ":00"
         Log.d("TTIME", promStart + " " + promEnd)
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        //TODO Доделать спинер
+        Toast.makeText(applicationContext,
+            bboxes[position],
+            Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        Toast.makeText(applicationContext,
+            "Ничего не выбрано",
+            Toast.LENGTH_LONG).show()
     }
 }

@@ -9,6 +9,7 @@ object HttpRoutes {
     private const val CONFIG = "config"
     private const val DEVICES = "devices"
     private const val LOG = "logs"
+    private const val BOX = "boxes"
     private const val TOKEN = "tokens"
     private const val FCMTOKEN = "fcmtoken"
 
@@ -19,6 +20,7 @@ object HttpRoutes {
     const val Config = "$BASE_URL$CONFIG"
     const val Devices = "$BASE_URL$DEVICES"
     const val Logs = "$BASE_URL$LOG"
+    const val Boxes = "$BASE_URL$BOX"
     const val Token = "$BASE_URL$TOKEN"
     const val FCMtoken = "$BASE_URL$FCMTOKEN"
 }

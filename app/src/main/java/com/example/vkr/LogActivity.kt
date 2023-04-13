@@ -34,8 +34,6 @@ class LogActivity : AppCompatActivity() {
                 ldata.add(d.data)
                 lpath.add(d.path)
                 r += "${d.id} ${d.name} ${d.data} ${d.path}\n"
-                //TODO 2023-04-03 22:51:00-2023-04-04 22:51:00
-                //TODO 0123456789
 
                 var s: String = ""
                 for(i in 0 until 16){
