@@ -240,9 +240,9 @@ open class Network {
             val body: RequestBody = RequestBody.create(
                 "application/json".toMediaTypeOrNull(), dataList
             )
-//TODO поменять ссылку на HttpRoutes
+
             val request = Request.Builder()
-                .url("https://web.foodrus.ru/api/config/replace")
+                .url(HttpRoutes.Replace)
                 .addHeader("Authorization", "Bearer $token")
                 .post(body)
                 .build()
@@ -265,9 +265,9 @@ open class Network {
             val body: RequestBody = RequestBody.create(
                 "application/json".toMediaTypeOrNull(), dataList
             )
-//TODO поменять ссылку на HttpRoutes
+
             val request = Request.Builder()
-                .url("https://web.foodrus.ru/api/config/replace")
+                .url(HttpRoutes.Replace)
                 .addHeader("Authorization", "Bearer $token")
                 .post(body)
                 .build()

@@ -1,15 +1,14 @@
 package com.example.vkr
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityMainBinding
-import com.example.vkr.network.MyApplication
 import com.example.vkr.network.Network
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -26,6 +25,14 @@ class MainActivity : AppCompatActivity() {
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
+        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val ll = sharedPreference.getString("login","defaultName")
+        val pp = sharedPreference.getString("password","defaultName")
+        if(ll != "defaultName") {
+            bindingClass.loginText.setText(ll)
+            bindingClass.passwordText.setText(pp)
+        }
+
         lateinit var FCMtoken: String;
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -33,25 +40,29 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
 
-            // Get new FCM registration token
             FCMtoken = task.result
 
-            // Log and toast
             val msg = FCMtoken.toString()
             Log.d("firebase", msg)
-            // Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
-
-        val mApp: MyApplication = this.application as MyApplication
 
         bindingClass.loginButton.setOnClickListener {
             var login = bindingClass.loginText.text.toString()
-            mApp.login = login
             var password = bindingClass.passwordText.text.toString()
-            mApp.password = password
+            val editor = sharedPreference.edit()
+
+            if(bindingClass.checkBox.isChecked) {
+                editor.putString("login", login)
+                editor.putString("password", password)
+                editor.apply()
+            }
+            else {
+                editor.remove("login")
+                editor.remove("password")
+                editor.apply()
+            }
 
             Network.tokenGet(login, password) {
-
                 runOnUiThread(Runnable {
                     var token = it.token
                     var error = it.error
@@ -59,9 +70,7 @@ class MainActivity : AppCompatActivity() {
                     if(token.isNotEmpty()){
                         bindingClass.status.text = token
                         val intent = Intent(this, MapActivity::class.java)
-                        Network.sendFCM(FCMtoken) {
-                            //Nothing to do
-                        }
+                        Network.sendFCM(FCMtoken) {}
                         startActivity(intent)
                     }
                     else {
@@ -72,8 +81,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             }
-
-
         }
 
 

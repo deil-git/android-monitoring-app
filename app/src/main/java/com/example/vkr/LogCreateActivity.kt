@@ -4,15 +4,13 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
-import androidx.core.view.get
-import com.example.vkr.databinding.ActivityLogBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityLogCreateBinding
 import com.example.vkr.network.Network
 import java.util.*
@@ -43,7 +41,7 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     var myYear2: Int = 0
     var myHour2: Int = 0
     var myMinute2: Int = 0
-    var bboxes = arrayListOf<String>()
+    var bboxes = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -52,23 +50,24 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         setContentView(bindingClass.root)
 
         Network.getBoxes {
-            var r: String = ""
+            runOnUiThread {
+                var r: String = ""
 
-            for (d in it.boxes) {
-                bboxes.add(d.name)
-                r += "${d.name}\n"
+                for (d in it.boxes) {
+                    bboxes.add(d.name)
+                    r += "${d.name}\n"
+                }
+
+                Log.d("Result", r)
+
+                var aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, bboxes)
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                with(bindingClass.spinnerInc) {
+                    adapter = aa
+                    onItemSelectedListener = this@LogCreateActivity
+                }
             }
-
-            Log.d("Result", r)
         }
-
-        var aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, bboxes)
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        with(bindingClass.spinnerInc) {
-            adapter = aa
-            onItemSelectedListener = this@LogCreateActivity
-        }
-        bindingClass.spinnerInc.setSelection(1)
 
         bindingClass.btnPick.setOnClickListener {
             ButtonNum = 1
@@ -222,7 +221,6 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        //TODO Доделать спинер
         Toast.makeText(applicationContext,
             bboxes[position],
             Toast.LENGTH_LONG).show()

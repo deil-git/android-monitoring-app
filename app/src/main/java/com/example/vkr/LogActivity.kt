@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.vkr.network.Network
 
-
 class LogActivity : AppCompatActivity() {
     var lig = arrayListOf<Int>()
     var lname = arrayListOf<String>()
@@ -103,8 +102,6 @@ class LogActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
         val createButton = findViewById<Button>(R.id.createButton)
         createButton.setOnClickListener {
