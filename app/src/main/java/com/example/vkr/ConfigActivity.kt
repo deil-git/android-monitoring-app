@@ -245,6 +245,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                                     dcorrect_h.add(d.correct_h)
                                 }
 
+//TODO разобраться
 //                        for (i in 1 until did.size+1) {
 //                            val adr = findViewById<TextView>(i + 100)
 //                            if (aaddress[i-1] != null) {
@@ -257,7 +258,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 //                            sp.setSelection(0)
 //                        }
 
-
                                 val et1 = findViewById<EditText>(1 + 1000)
                                 val et2 = findViewById<EditText>(1 + 10000)
                                 if(et1.text.isNotEmpty()){
@@ -269,10 +269,8 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             }
                         }
                     }
-
                 }
-                }
-
+            }
         }
     }
 
@@ -288,19 +286,16 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onStop(){
         super.onStop()
-
         this.finish()
     }
 
     override fun onPause(){
         super.onPause()
-
         this.finish()
     }
 
     override fun onDestroy(){
         super.onDestroy()
-
         this.finish()
     }
 }

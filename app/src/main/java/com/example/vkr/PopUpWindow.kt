@@ -44,7 +44,6 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
-        //overridePendingTransition(0, 0)
         bindingClass = ActivityPopUpWindowBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
@@ -84,49 +83,45 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
                     "Выберите временной промежуток",
                     Toast.LENGTH_LONG).show()
             } else{
-                if(myYear1 <= myYear2){
-                    if(myYear1 == myYear2){
-                        if(myMonth1 <= myMonth2){
-                            if(myMonth1 == myMonth2){
-                                if(myDay1 <= myDay2){
-                                    if(myDay1 == myDay2){
-                                        if(myHour1 <= myHour2){
-                                            if(myHour1 == myHour2){
-                                                if(myMinute1 < myMinute2){
-                                                    val intent = Intent()
-                                                    intent.putExtra("typeGraph", "PromTime")
-                                                    intent.putExtra("promStart", promStart)
-                                                    intent.putExtra("promEnd", promEnd)
-                                                    setResult(RESULT_OK, intent)
-                                                    finish()
-                                                } else{Error = true}
-                                            } else{val intent = Intent()
-                                                intent.putExtra("typeGraph", "PromTime")
-                                                intent.putExtra("promStart", promStart)
-                                                intent.putExtra("promEnd", promEnd)
-                                                setResult(RESULT_OK, intent)
-                                                finish()}
-                                        } else{Error = true}
-                                    } else{val intent = Intent()
-                                        intent.putExtra("typeGraph", "PromTime")
-                                        intent.putExtra("promStart", promStart)
-                                        intent.putExtra("promEnd", promEnd)
-                                        setResult(RESULT_OK, intent)
-                                        finish()}
-                                } else{Error = true}
-                            } else{val intent = Intent()
-                                intent.putExtra("typeGraph", "PromTime")
-                                intent.putExtra("promStart", promStart)
-                                intent.putExtra("promEnd", promEnd)
-                                setResult(RESULT_OK, intent)
-                                finish()}
-                        } else{Error = true}
+                if(myYear1 <= myYear2){ if(myYear1 == myYear2){
+                if(myMonth1 <= myMonth2){ if(myMonth1 == myMonth2){
+                if(myDay1 <= myDay2){ if(myDay1 == myDay2){
+                if(myHour1 <= myHour2){ if(myHour1 == myHour2){
+                if(myMinute1 < myMinute2){
+                    val intent = Intent()
+                    intent.putExtra("typeGraph", "PromTime")
+                    intent.putExtra("promStart", promStart)
+                    intent.putExtra("promEnd", promEnd)
+                    setResult(RESULT_OK, intent)
+                    finish()
+                } else{Error = true}
                     } else{val intent = Intent()
                         intent.putExtra("typeGraph", "PromTime")
                         intent.putExtra("promStart", promStart)
                         intent.putExtra("promEnd", promEnd)
                         setResult(RESULT_OK, intent)
                         finish()}
+                } else{Error = true}
+                    } else{val intent = Intent()
+                        intent.putExtra("typeGraph", "PromTime")
+                        intent.putExtra("promStart", promStart)
+                        intent.putExtra("promEnd", promEnd)
+                        setResult(RESULT_OK, intent)
+                        finish()}
+                } else{Error = true}
+                    } else{val intent = Intent()
+                        intent.putExtra("typeGraph", "PromTime")
+                        intent.putExtra("promStart", promStart)
+                        intent.putExtra("promEnd", promEnd)
+                        setResult(RESULT_OK, intent)
+                        finish()}
+                } else{Error = true}
+                } else{val intent = Intent()
+                    intent.putExtra("typeGraph", "PromTime")
+                    intent.putExtra("promStart", promStart)
+                    intent.putExtra("promEnd", promEnd)
+                    setResult(RESULT_OK, intent)
+                    finish()}
                 } else{Error = true}
 
                 if(Error){
@@ -137,6 +132,7 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             }
         }
     }
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myDay = dayOfMonth
         myYear = year
@@ -202,6 +198,6 @@ class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         promStart = myYear1.toString() + "-" + myMonth1s + "-" + myDay1s + "T" + myHour1s + ":" + myMinute1s + ":00"
         promEnd = myYear2.toString() + "-" + myMonth2s + "-" + myDay2s + "T" + myHour2s + ":" + myMinute2s + ":00"
-        Log.d("TTIME", promStart + " " + promEnd)
+        Log.d("DateTime", promStart + " " + promEnd)
     }
 }

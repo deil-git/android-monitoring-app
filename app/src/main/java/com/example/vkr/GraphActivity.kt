@@ -26,21 +26,14 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-
 class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
 
     @SuppressLint("SimpleDateFormat")
     override fun getFormattedValue(value: Float): String? {
-        // Convert float value to date string
-        // Convert from seconds back to milliseconds to format time  to show to the user
         val emissionsMilliSince1970Time = value.toLong() * 1000
-
-        // Show time in local version
         val date = Date(emissionsMilliSince1970Time)
         val format = SimpleDateFormat("MM.dd HH:mm:ss")
         return format.format(date)
-//        val dateTimeFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-//        return dateTimeFormat.format(timeMilliseconds)
     }
 }
 
@@ -56,7 +49,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     var typeGraph = "RealTime"
     var promStart = ""
     var promEnd = ""
-
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,12 +88,9 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         val xAxis = chart.xAxis
         chart.xAxis.valueFormatter = LineChartXAxisValueFormatter()
 
-//        xAxis.enableGridDashedLine(10f,10f,0f)
-//        xAxis2.enableGridDashedLine(10f,10f,0f)
-
         val yAxis = chart.axisLeft
         val yAxis2 = chart2.axisRight
-//        chart.axisRight.isEnabled = false
+
         yAxis.enableGridDashedLine(10f, 10f, 0f)
         yAxis.setAxisMaximum(33f)
         yAxis.setAxisMinimum(26f)
@@ -114,21 +103,18 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         llXAxis.enableDashedLine(10f, 10f, 0f)
         llXAxis.labelPosition = LimitLabelPosition.RIGHT_BOTTOM
         llXAxis.textSize = 10f
-        //llXAxis.typeface = tfRegular
 
         val ll1 = LimitLine(28.5f, "макс. темп.")
         ll1.lineWidth = 3f
         ll1.enableDashedLine(10f, 10f, 0f)
         ll1.labelPosition = LimitLabelPosition.RIGHT_TOP
         ll1.textSize = 10f
-        //ll1.typeface = tfRegular
 
         val ll2 = LimitLine(27f, "мин. темп.")
         ll2.lineWidth = 3f
         ll2.enableDashedLine(10f, 10f, 0f)
         ll2.labelPosition = LimitLabelPosition.RIGHT_BOTTOM
         ll2.textSize = 10f
-        //ll2.typeface = tfRegular
 
         val ll3 = LimitLine(31.5f, "макс. влаж.")
         ll3.lineWidth = 3f
@@ -142,11 +128,9 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         ll4.labelPosition = LimitLabelPosition.RIGHT_BOTTOM
         ll4.textSize = 10f
 
-        // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true)
         xAxis.setDrawLimitLinesBehindData(true)
 
-        // add limit lines
         yAxis.addLimitLine(ll1)
         yAxis.addLimitLine(ll2)
         yAxis.addLimitLine(ll3)
@@ -163,8 +147,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             val intent = Intent(this, PopUpWindow::class.java)
             startActivityForResult(intent, 1)
         }
-
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
@@ -180,10 +164,12 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         super.onPause()
         executorService.shutdown()
     }
+
     override fun onStop() {
         super.onStop()
         executorService.shutdown()
     }
+
     @SuppressLint("SimpleDateFormat")
     override fun onResume() {
         super.onResume()
@@ -197,7 +183,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                         atemp.clear()
                         ahum.clear()
                         for (d in it) {
-
                             atemp.add(d.temp)
                             ahum.add(d.hum)
 
@@ -208,9 +193,9 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
                             val date = format.parse(s)
                             val floatTime = date.time.toFloat() / 1000
                             atime.add(floatTime)
+
                             r += "${d.temp} ${d.hum} ${floatTime} \n"
                         }
-                        Log.d("getData", "итерация")
                         setData()
                     }
                     else {
@@ -222,7 +207,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     }
 
     private fun setData() {
-
         chart.data = null
 
         val values: ArrayList<Entry> = ArrayList()
@@ -252,7 +236,6 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             chart2.data.notifyDataChanged()
             chart2.notifyDataSetChanged()
         } else {
-            // create a dataset and give it a type
             set1 = LineDataSet(values, "Температура")
 
             set1.setDrawIcons(false)
@@ -261,72 +244,46 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
             set2.setDrawIcons(false)
 
-            // draw dashed line
-            //set1.enableDashedLine(10f, 5f, 0f)
-
-            // black lines and points
             set1.color = Color.GREEN
             set1.setCircleColor(Color.TRANSPARENT)
 
             set2.color = Color.BLUE
             set2.setCircleColor(Color.TRANSPARENT)
 
-            // line thickness and point size
             set1.lineWidth = 1f
             set1.circleRadius = 1f
 
             set2.lineWidth = 1f
             set2.circleRadius = 1f
 
-            // draw points as solid circles
             set1.setDrawCircleHole(false)
             set2.setDrawCircleHole(false)
 
-            // customize legend entry
             set1.formLineWidth = 1f
             set2.formLineWidth = 1f
-            //set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+
             set1.formSize = 15f
             set2.formSize = 15f
 
-            // text size of values
             set1.valueTextSize = 0f
             set2.valueTextSize = 0f
-
-            // draw selection line as dashed
-            //set1.enableDashedHighlightLine(10f, 5f, 0f)
-
-            // set the filled area
-//            set1.setDrawFilled(true)
-//            set1.fillFormatter = IFillFormatter { dataSet, dataProvider -> chart.axisLeft.axisMinimum }
-
-            // set color of filled area
-//                val drawable = ContextCompat.getDrawable(this, R.color.teal_200)
-//                set1.fillDrawable = drawable
-//                set1.fillColor = Color.BLACK
-
 
             val dataSets = ArrayList<ILineDataSet>()
             dataSets.add(set1)
             dataSets.add(set2)
 
-            // create a data object with the data sets
             val data = LineData(dataSets)
 
-            // set data
             chart.data = data
 
             chart.invalidate()
-
         }
     }
 
-
-    override fun onNothingSelected() {
-    }
+    override fun onNothingSelected() {}
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
-        bindingClass.chart1.highlightValue(h);
+        bindingClass.chart1.highlightValue(h)
         if (h != null) {
             val description = chart.description
             if (h.dataSetIndex == 0){
@@ -335,10 +292,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             else{
                 description.text = h.getY().toString() + "%"
             }
-
-            //Log.d("Highlight", "onValueSelected: " + h.getY() + " " + e)
-        };
+        }
     }
-
 }
 
