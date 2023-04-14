@@ -68,7 +68,7 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             adapter = aa
             onItemSelectedListener = this@LogCreateActivity
         }
-        //bindingClass.spinnerInc.setSelection(0)
+        bindingClass.spinnerInc.setSelection(1)
 
         bindingClass.btnPick.setOnClickListener {
             ButtonNum = 1

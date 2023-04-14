@@ -2,6 +2,7 @@ package com.example.vkr.network
 
 import android.util.Log
 import com.example.vkr.data_structs.ConfigStruct
+import com.example.vkr.data_structs.CorrectStruct
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
@@ -239,7 +240,7 @@ open class Network {
             val body: RequestBody = RequestBody.create(
                 "application/json".toMediaTypeOrNull(), dataList
             )
-
+//TODO поменять ссылку на HttpRoutes
             val request = Request.Builder()
                 .url("https://web.foodrus.ru/api/config/replace")
                 .addHeader("Authorization", "Bearer $token")
@@ -251,6 +252,32 @@ open class Network {
 
                 override fun onResponse(call: Call, response: Response) {
                     val res = response.body?.string().toString()
+                    onResult(res)
+                }
+            })
+        }
+
+        fun sendCorect(data: MutableList<CorrectStruct>, onResult: (String) -> Unit){
+            val gson = Gson()
+            var dataList = gson.toJson(mapOf("device" to data))
+            val client = OkHttpClient()
+
+            val body: RequestBody = RequestBody.create(
+                "application/json".toMediaTypeOrNull(), dataList
+            )
+//TODO поменять ссылку на HttpRoutes
+            val request = Request.Builder()
+                .url("https://web.foodrus.ru/api/config/replace")
+                .addHeader("Authorization", "Bearer $token")
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {
+                    val res = response.body?.string().toString()
+                    Log.d("debug0", res)
                     onResult(res)
                 }
             })

@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.vkr.data_structs.ConfigStruct
+import com.example.vkr.data_structs.CorrectStruct
 import com.example.vkr.network.Network
 
 class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -183,13 +184,14 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         val saveButtonClick = findViewById<Button>(R.id.saveButton1)
         saveButtonClick.setOnClickListener {
-            val data:MutableList<ConfigStruct> = arrayListOf()
+            val data_config:MutableList<ConfigStruct> = arrayListOf()
+            val data_correct:MutableList<CorrectStruct> = arrayListOf()
 
             for(i in 0 until abox_id.size) {
-                data.add(i, ConfigStruct(abox_id[i], aaddress[i]))
+                data_config.add(i, ConfigStruct(abox_id[i], aaddress[i]))
             }
 
-            Network.sendConfig(data){
+            Network.sendConfig(data_config){
                 Network.getAddress {
                     runOnUiThread{
                         aaddress.clear()
@@ -215,20 +217,61 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             sp.setSelection(0)
                         }
 
-
-                        val et1 = findViewById<EditText>(1 + 1000)
-                        val et2 = findViewById<EditText>(1 + 10000)
-                        if(et1.text.isNotEmpty()){
-                            Log.d("debug0", et1.text.toString())
+                        for(i in 1 until did.size + 1) {
+                            val et1 = findViewById<EditText>(i + 1000)
+                            val et2 = findViewById<EditText>(i + 10000)
+                            if (et1.text.isNotEmpty()) {
+                                dcorrect_t[i-1] = et1.text.toString().toFloat()
+                                Log.d("debug0", et1.text.toString())
+                                Log.d("debug0", dcorrect_t[i-1].toString())
+                            }
+                            if (et2.text.isNotEmpty()) {
+                                dcorrect_h[i-1] = et2.text.toString().toFloat()
+                                Log.d("debug0", et2.text.toString())
+                                Log.d("debug0", dcorrect_h[i-1].toString())
+                            }
                         }
-                        if(et2.text.isNotEmpty()){
-                            Log.d("debug0", et2.text.toString())
+                        for(i in 0 until did.size) {
+                            Log.d("debug0", dcorrect_t[i].toString())
+                            data_correct.add(i, CorrectStruct(did[i], dcorrect_t[i], dcorrect_h[i]))
+                        }
+                        Network.sendCorect(data_correct){
+                            Network.getDevices {
+                                dcorrect_t.clear()
+                                dcorrect_h.clear()
+
+                                for (d in it.device_list) {
+                                    dcorrect_t.add(d.correct_t)
+                                    dcorrect_h.add(d.correct_h)
+                                }
+
+//                        for (i in 1 until did.size+1) {
+//                            val adr = findViewById<TextView>(i + 100)
+//                            if (aaddress[i-1] != null) {
+//                                adr.text = aaddress[i-1]
+//                            }
+//                            else {
+//                                adr.text = "None"
+//                            }
+//                            val sp = findViewById<Spinner>(i)
+//                            sp.setSelection(0)
+//                        }
+
+
+                                val et1 = findViewById<EditText>(1 + 1000)
+                                val et2 = findViewById<EditText>(1 + 10000)
+                                if(et1.text.isNotEmpty()){
+                                    //Log.d("debug0", et1.text.toString())
+                                }
+                                if(et2.text.isNotEmpty()){
+                                    //Log.d("debug0", et2.text.toString())
+                                }
+                            }
                         }
                     }
+
                 }
-            }
-
-
+                }
 
         }
     }
