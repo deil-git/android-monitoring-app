@@ -27,6 +27,12 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var dcorrect_t = arrayListOf<Float>()
     var dcorrect_h = arrayListOf<Float>()
 
+    fun showToast(toast: String?) {
+        runOnUiThread {
+            Toast.makeText(this@ConfigActivity, toast, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     @SuppressLint("SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -192,6 +198,9 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
 
             Network.sendConfig(data_config){
+                if (!it.contains("OK")) {
+                    showToast("Ошибка: данные не отправлены")
+                }
                 Network.getAddress {
                     runOnUiThread{
                         aaddress.clear()
@@ -221,21 +230,43 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             val et1 = findViewById<EditText>(i + 1000)
                             val et2 = findViewById<EditText>(i + 10000)
                             if (et1.text.isNotEmpty()) {
-                                dcorrect_t[i-1] = et1.text.toString().toFloat()
-                                Log.d("debug0", et1.text.toString())
-                                Log.d("debug0", dcorrect_t[i-1].toString())
+                                et1.setText(et1.text.toString().replace(",", "."))
+                                if (et1.text.count { it == '.' } == 0) {
+                                    et1.setText(et1.text.toString() + ".0")
+                                }
+                                if (et1.text.count { it == '.' } > 1) {
+                                    Toast.makeText(applicationContext,
+                                        "Некорректные данные температуры",
+                                        Toast.LENGTH_LONG).show()
+                                }
+                                else {
+                                    dcorrect_t[i-1] = et1.text.toString().toFloat()
+                                }
                             }
                             if (et2.text.isNotEmpty()) {
-                                dcorrect_h[i-1] = et2.text.toString().toFloat()
-                                Log.d("debug0", et2.text.toString())
-                                Log.d("debug0", dcorrect_h[i-1].toString())
+                                et2.setText(et2.text.toString().replace(",", "."))
+                                if (et2.text.count { it == '.' } == 0) {
+                                    et2.setText(et2.text.toString() + ".0")
+                                }
+                                if (et2.text.count { it == '.' } > 1) {
+                                    Toast.makeText(applicationContext,
+                                        "Некорректные данные влажности",
+                                        Toast.LENGTH_LONG).show()
+                                }
+                                else {
+                                    dcorrect_h[i-1] = et2.text.toString().toFloat()
+                                }
                             }
                         }
+
                         for(i in 0 until did.size) {
-                            Log.d("debug0", dcorrect_t[i].toString())
                             data_correct.add(i, CorrectStruct(did[i], dcorrect_t[i], dcorrect_h[i]))
                         }
-                        Network.sendCorect(data_correct){
+
+                        Network.sendCorect(data_correct){ it2 ->
+                            if (!it2.contains("OK")) {
+                                showToast("Ошибка: данные не отправлены")
+                            }
                             Network.getDevices {
                                 dcorrect_t.clear()
                                 dcorrect_h.clear()
@@ -245,26 +276,13 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                                     dcorrect_h.add(d.correct_h)
                                 }
 
-//TODO разобраться
-//                        for (i in 1 until did.size+1) {
-//                            val adr = findViewById<TextView>(i + 100)
-//                            if (aaddress[i-1] != null) {
-//                                adr.text = aaddress[i-1]
-//                            }
-//                            else {
-//                                adr.text = "None"
-//                            }
-//                            val sp = findViewById<Spinner>(i)
-//                            sp.setSelection(0)
-//                        }
-
-                                val et1 = findViewById<EditText>(1 + 1000)
-                                val et2 = findViewById<EditText>(1 + 10000)
-                                if(et1.text.isNotEmpty()){
-                                    //Log.d("debug0", et1.text.toString())
-                                }
-                                if(et2.text.isNotEmpty()){
-                                    //Log.d("debug0", et2.text.toString())
+                                for(i in 1 until did.size + 1) {
+                                    val et1 = findViewById<EditText>(i + 1000)
+                                    val et2 = findViewById<EditText>(i + 10000)
+                                    et1.setText(dcorrect_t[i-1].toString())
+                                    et1.hint = dcorrect_t[i-1].toString()
+                                    et2.setText(dcorrect_h[i-1].toString())
+                                    et2.hint = dcorrect_h[i-1].toString()
                                 }
                             }
                         }

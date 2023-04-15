@@ -12,10 +12,12 @@ import java.lang.reflect.Type
 import java.util.*
 
 open class Network {
+
     companion object {
         var token = ""
         var login_g = ""
         var password_g = ""
+
         fun tokenGet(login: String, password: String, onResult: (ServerResponse) -> Unit) {
             login_g = login
             password_g = password
@@ -276,7 +278,6 @@ open class Network {
 
                 override fun onResponse(call: Call, response: Response) {
                     val res = response.body?.string().toString()
-                    Log.d("debug0", res)
                     onResult(res)
                 }
             })
