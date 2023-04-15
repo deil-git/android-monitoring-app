@@ -49,6 +49,18 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         bindingClass = ActivityLogCreateBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
+        Network.getAddress {
+            if (it.err) {
+                MainActivity.AppPreferences.login?.let {
+                        it1 -> MainActivity.AppPreferences.password?.let {
+                        it2 -> Network.tokenGet(it1, it2){ it3 ->
+                            MainActivity.AppPreferences.token = it3.token
+                        }
+                    }
+                }
+            }
+        }
+
         Network.getBoxes {
             runOnUiThread {
                 var r: String = ""

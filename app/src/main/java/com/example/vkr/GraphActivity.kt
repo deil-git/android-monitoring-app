@@ -211,13 +211,11 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
         val values: ArrayList<Entry> = ArrayList()
         for (i in 0 until atemp.size) {
-            // turn your data into Entry objects
             values.add(Entry(atime[i], atemp[i]))
         }
 
         val values2: ArrayList<Entry> = ArrayList()
         for (i in 0 until ahum.size) {
-            // turn your data into Entry objects
             values2.add(Entry(atime[i], ahum[i]))
         }
 

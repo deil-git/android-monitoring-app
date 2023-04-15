@@ -1,6 +1,7 @@
 package com.example.vkr.network
 
 import android.util.Log
+import com.example.vkr.MainActivity
 import com.example.vkr.data_structs.ConfigStruct
 import com.example.vkr.data_structs.CorrectStruct
 import com.google.gson.Gson
@@ -10,6 +11,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.IOException
 import java.lang.reflect.Type
 import java.util.*
+import kotlin.properties.Delegates
 
 open class Network {
 
@@ -17,6 +19,7 @@ open class Network {
         var token = ""
         var login_g = ""
         var password_g = ""
+        var err by Delegates.notNull<Boolean>()
 
         fun tokenGet(login: String, password: String, onResult: (ServerResponse) -> Unit) {
             login_g = login
@@ -84,6 +87,8 @@ open class Network {
         }
 
         fun getAddress(onResult: (AddressResponse) -> Unit) {
+            token = MainActivity.AppPreferences.token.toString()
+            err = false
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -98,23 +103,22 @@ open class Network {
                     val gson = Gson()
                     val userType: Type = object : TypeToken<AddressResponse?>() {}.type
                     var userList: AddressResponse = AddressResponse()
+                    var s = response.body?.string()
+                    userList = gson.fromJson(s, userType)
 
-                    try {
-                        var s = response.body?.string()
-                        userList = gson.fromJson(s, userType)
+                    if(s.toString().contains("Unauthorized")) {
+                        Log.d("getAddressError", "Error")
+                        err = true
+                        userList.err = err
                     }
-                    catch (e:Exception) {
-                        Log.d("getAddressError", e.toString())
-                        tokenGet(login_g, password_g) {
-                            token = it.token
-                        }
-                    }
+                    userList.err = err
                     onResult(userList)
                 }
             })
         }
 
         fun getDevices(onResult: (DeviceResponce) -> Unit) {
+            token = MainActivity.AppPreferences.token.toString()
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -136,9 +140,6 @@ open class Network {
                     }
                     catch (e:Exception) {
                         Log.d("getDevicesError", e.toString())
-                        tokenGet(login_g, password_g) {
-                            token = it.token
-                        }
                     }
                     onResult(userList)
                 }
@@ -146,6 +147,7 @@ open class Network {
         }
 
         fun getLogs(onResult: (LogResponce) -> Unit) {
+            token = MainActivity.AppPreferences.token.toString()
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -177,6 +179,7 @@ open class Network {
         }
 
         fun getBoxes(onResult: (BoxResponce) -> Unit) {
+            token = MainActivity.AppPreferences.token.toString()
             val client = OkHttpClient()
 
             var request: Request = Request.Builder()
@@ -208,6 +211,7 @@ open class Network {
         }
 
         fun sendFCM(FCMtoken: String, onResult: (String) -> Unit) {
+            token = MainActivity.AppPreferences.token.toString()
             val client = OkHttpClient()
 
             val data = "{ \"fcm\" : \"$FCMtoken\" }"
@@ -234,6 +238,7 @@ open class Network {
         }
 
         fun sendConfig(data: MutableList<ConfigStruct>, onResult: (String) -> Unit){
+            token = MainActivity.AppPreferences.token.toString()
             val gson = Gson()
             var dataList = gson.toJson(mapOf("box" to data))
             val client = OkHttpClient()
@@ -259,6 +264,7 @@ open class Network {
         }
 
         fun sendCorect(data: MutableList<CorrectStruct>, onResult: (String) -> Unit){
+            token = MainActivity.AppPreferences.token.toString()
             val gson = Gson()
             var dataList = gson.toJson(mapOf("device" to data))
             val client = OkHttpClient()

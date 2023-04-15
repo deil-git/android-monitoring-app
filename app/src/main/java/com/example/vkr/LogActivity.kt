@@ -24,6 +24,18 @@ class LogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log)
 
+        Network.getAddress {
+            if (it.err) {
+                MainActivity.AppPreferences.login?.let {
+                        it1 -> MainActivity.AppPreferences.password?.let {
+                        it2 -> Network.tokenGet(it1, it2){ it3 ->
+                            MainActivity.AppPreferences.token = it3.token
+                        }
+                    }
+                }
+            }
+        }
+
         Network.getLogs {
             var r: String = ""
 

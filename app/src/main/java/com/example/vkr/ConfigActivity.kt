@@ -40,6 +40,18 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_config)
 
         Network.getAddress {
+            if (it.err) {
+                MainActivity.AppPreferences.login?.let {
+                    it1 -> MainActivity.AppPreferences.password?.let {
+                        it2 -> Network.tokenGet(it1, it2){ it3 ->
+                            MainActivity.AppPreferences.token = it3.token
+                        }
+                    }
+                }
+            }
+        }
+
+        Network.getAddress {
             var r: String = ""
 
             for (d in it.addresses) {
@@ -81,8 +93,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     t3v.id = abox_id[i] + 100
                     if (aaddress[i] != null) {
                         t3v.text = aaddress[i]
-                    }
-                    else {
+                    } else {
                         t3v.text = "None"
                     }
                     t3v.setTextColor(Color.BLACK)
@@ -102,6 +113,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 }
             }
         }
+
 
         Network.getDevices {
             var r: String = ""
@@ -192,6 +204,18 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         saveButtonClick.setOnClickListener {
             val data_config:MutableList<ConfigStruct> = arrayListOf()
             val data_correct:MutableList<CorrectStruct> = arrayListOf()
+
+            Network.getAddress {
+                if (it.err) {
+                    MainActivity.AppPreferences.login?.let {
+                            it1 -> MainActivity.AppPreferences.password?.let {
+                            it2 -> Network.tokenGet(it1, it2){ it3 ->
+                                MainActivity.AppPreferences.token = it3.token
+                            }
+                        }
+                    }
+                }
+            }
 
             for(i in 0 until abox_id.size) {
                 data_config.add(i, ConfigStruct(abox_id[i], aaddress[i]))
