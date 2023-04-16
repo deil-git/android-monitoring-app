@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ФудРус Мониторинг</string>
+    <string name="loginlogo1">ФудРус</string>
+    <string name="loginlogo2">Мониторинг</string>
     <string name="back">Назад</string>
     <string name="create">Создать</string>
     <string name="save">Сохранить</string>
