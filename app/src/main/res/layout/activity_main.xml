@@ -100,7 +100,7 @@
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/loginText"
         app:layout_constraintEnd_toEndOf="@+id/loginText"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/loginText"
         app:srcCompat="@drawable/foodrus_login_logo" />
 
@@ -108,9 +108,10 @@
         android:id="@+id/loginlogo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-9dp"
         android:text="@string/loginlogo1"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/loginlogo2"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -119,14 +120,13 @@
         android:id="@+id/loginlogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="-5dp"
         android:text="@string/loginlogo2"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
