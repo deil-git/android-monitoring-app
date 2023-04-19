@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
@@ -18,6 +19,8 @@ import java.util.*
 class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
     lateinit var bindingClass: ActivityLogCreateBinding
+    lateinit var s1: String
+    lateinit var s2: String
     var promStart = ""
     var promEnd = ""
     var ButtonNum = 0
@@ -48,6 +51,11 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         super.onCreate(savedInstanceState)
         bindingClass = ActivityLogCreateBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
+
+        s1 = "<b>С:</b> "
+        bindingClass.textTime.text = Html.fromHtml(s1)
+        s2 = "<b>До:</b> "
+        bindingClass.textTime2.text = Html.fromHtml(s2)
 
         Network.getAddress {
             if (it.err) {
@@ -177,14 +185,12 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         myHour = hourOfDay
         myMinute = minute
         if(ButtonNum == 1) {
-            bindingClass.textTime.text = "С: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
             myDay1 = myDay
             myMonth1 = myMonth
             myYear1 = myYear
             myHour1 = myHour
             myMinute1 = myMinute
         } else{
-            bindingClass.textTime2.text = "До: " + myDay + "." + myMonth+ "." + myYear + " " + myHour + ":" + myMinute
             myDay2 = myDay
             myMonth2 = myMonth
             myYear2 = myYear
@@ -210,6 +216,9 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         if(myDay1 <= 9){
             myDay1s = "0" + myDay1.toString()
         }
+        if(myDay2 <= 9){
+            myDay2s = "0" + myDay2.toString()
+        }
         if(myHour1 <= 9){
             myHour1s = "0" + myHour1.toString()
         }
@@ -221,6 +230,14 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         }
         if(myMinute2 <= 9){
             myMinute2s = "0" + myMinute2.toString()
+        }
+
+        if(ButtonNum == 1) {
+            s1 = "<b>С:</b> $myDay1s.$myMonth1s.$myYear $myHour1s:$myMinute1s"
+            bindingClass.textTime.text = Html.fromHtml(s1)
+        } else{
+            s2 = "<b>До:</b> $myDay2s.$myMonth2s.$myYear $myHour2s:$myMinute2s"
+            bindingClass.textTime2.text = Html.fromHtml(s2)
         }
 
         promStart = myYear1.toString() + "-" + myMonth1s + "-" + myDay1s + "T" + myHour1s + ":" + myMinute1s + ":00"
