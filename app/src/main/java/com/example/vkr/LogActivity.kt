@@ -54,7 +54,12 @@ class LogActivity : AppCompatActivity() {
                 for(i in 20 until d.data.length - 3){
                     s += d.data[i]
                 }
-                ldataf.add(s)
+                var fs: String = ""
+                fs += s[8] + s[9].toString() + "." + s[5] + s[6] + "." + s[0] + s[1] + s[2] + s[3]
+                fs += " " + s[11] + s[12] + ":" + s[14] + s[15]
+                fs += " - " + s[27] + s[28] + "." + s[24] + s[25] + "." + s[19] + s[20] + s[21] + s[22]
+                fs += " " + s[30] + s[31] + ":" + s[33] + s[34]
+                ldataf.add(fs)
             }
 
             Log.d("Result", r)
