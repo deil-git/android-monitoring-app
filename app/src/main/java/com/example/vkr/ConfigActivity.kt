@@ -6,11 +6,13 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
+import android.widget.Toast.LENGTH_LONG
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.vkr.data_structs.ConfigStruct
@@ -78,16 +80,25 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     stk.addView(space)
                     stk.addView(tbrow2)
                     val tbrow = TableRow(this)
+                    val ttbrow = TableRow(this)
                     val tbrow1 = TableRow(this)
+                    val spp = Space(this)
+                    val chk1 = CheckBox(this)
+                    ttbrow.addView(Space(this))
+                    tbrow.addView(chk1)
+                    ttbrow.addView(Space(this))
+                    tbrow.addView(spp)
                     val t1v = TextView(this)
                     t1v.text = abox_id[i].toString()
                     t1v.setTextColor(Color.BLACK)
                     t1v.textSize = 20F
+                    ttbrow.addView(Space(this))
                     tbrow.addView(t1v)
                     val t2v = TextView(this)
                     t2v.text = abox_name[i]
                     t2v.setTextColor(Color.BLACK)
                     t2v.textSize = 20F
+                    ttbrow.addView(Space(this))
                     tbrow.addView(t2v)
                     val t3v = TextView(this)
                     t3v.id = abox_id[i] + 100
@@ -107,8 +118,9 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         onItemSelectedListener = this@ConfigActivity
                     }
                     sp.id = abox_id[i]
+                    ttbrow.addView(sp)
                     stk.addView(tbrow)
-                    stk.addView(sp)
+                    stk.addView(ttbrow)
                     stk.addView(tbrow1)
                 }
             }
@@ -313,6 +325,11 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     }
                 }
             }
+        }
+
+        val notif = findViewById<ImageView>(R.id.notif)
+        notif.setOnClickListener {
+            Toast.makeText(applicationContext,"Получение уведомлений", LENGTH_LONG).show()
         }
     }
 
