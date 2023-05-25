@@ -22,6 +22,8 @@ import com.example.vkr.network.Network
 class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var abox_id = arrayListOf<Int>()
     var aaddress = arrayListOf<String>()
+    var aonoff = arrayListOf<Int>()
+    var anotif = arrayListOf<Int>()
     var abox_name = arrayListOf<String>()
     var adev_list = arrayListOf<String>()
     var did = arrayListOf<Int>()
@@ -57,10 +59,12 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             var r: String = ""
 
             for (d in it.addresses) {
+                aonoff.add(d.box_active)
+                anotif.add(d.alert_active)
                 abox_id.add(d.box_id)
                 aaddress.add(d.address)
                 abox_name.add(d.box_name)
-                r += "${d.box_id} ${d.address} ${d.box_name} \n"
+                r += "${d.box_active} ${d.alert_active} ${d.box_id} ${d.address} ${d.box_name} \n"
             }
 
             for (d in it.dev_list) {
@@ -82,12 +86,22 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     val tbrow = TableRow(this)
                     val ttbrow = TableRow(this)
                     val tbrow1 = TableRow(this)
-                    val spp = Space(this)
-                    val chk1 = CheckBox(this)
+                    val chk_onoff = CheckBox(this)
+                    val chk_notif = CheckBox(this)
+                    if (aonoff[i] == 1) {
+                        chk_onoff.setChecked(true)
+                    }
+                    if (anotif[i] == 1) {
+                        chk_notif.setChecked(true)
+                    }
                     ttbrow.addView(Space(this))
-                    tbrow.addView(chk1)
+                    tbrow.addView(chk_onoff)
                     ttbrow.addView(Space(this))
-                    tbrow.addView(spp)
+                    tbrow.addView(Space(this))
+                    ttbrow.addView(Space(this))
+                    tbrow.addView(chk_notif)
+                    ttbrow.addView(Space(this))
+                    tbrow.addView(Space(this))
                     val t1v = TextView(this)
                     t1v.text = abox_id[i].toString()
                     t1v.setTextColor(Color.BLACK)
@@ -330,6 +344,11 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val notif = findViewById<ImageView>(R.id.notif)
         notif.setOnClickListener {
             Toast.makeText(applicationContext,"Получение уведомлений", LENGTH_LONG).show()
+        }
+
+        val onoff = findViewById<ImageView>(R.id.onoff)
+        onoff.setOnClickListener {
+            Toast.makeText(applicationContext,"Включение/выключение", LENGTH_LONG).show()
         }
     }
 
