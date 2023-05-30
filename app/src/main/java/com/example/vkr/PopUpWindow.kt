@@ -13,7 +13,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityPopUpWindowBinding
 import java.util.*
-import kotlin.properties.Delegates
 
 class PopUpWindow : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {

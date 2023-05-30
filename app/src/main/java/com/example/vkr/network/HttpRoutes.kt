@@ -1,7 +1,6 @@
 package com.example.vkr.network
 
 object HttpRoutes {
-
     private const val BASE_URL = "https://web.foodrus.ru/api/"
     private const val INDICATIONS = "indications/"
     private const val PROM_TIME_START = "?start="

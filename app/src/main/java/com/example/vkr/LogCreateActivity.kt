@@ -245,11 +245,7 @@ class LogCreateActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         Log.d("DateTime", promStart + " " + promEnd)
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Toast.makeText(applicationContext,
-            bboxes[position],
-            Toast.LENGTH_LONG).show()
-    }
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         Toast.makeText(applicationContext,

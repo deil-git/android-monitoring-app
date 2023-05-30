@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vkr.databinding.ActivityGraphBinding
@@ -303,4 +302,3 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         }
     }
 }
-
