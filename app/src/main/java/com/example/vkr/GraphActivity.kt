@@ -43,6 +43,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     lateinit var chart: LineChart
     lateinit var chart2: LineChart
     lateinit var incubNum: String
+    lateinit var logBool: String
+    lateinit var logId: String
     var atemp = arrayListOf<Float>()
     var ahum = arrayListOf<Float>()
     var atime = arrayListOf<Float>()
@@ -53,6 +55,8 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         incubNum = intent.getStringExtra("incubNum") ?: ""
+        logBool = intent.getStringExtra("logBool") ?: ""
+        logId = intent.getStringExtra("logId") ?: ""
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         bindingClass = ActivityGraphBinding.inflate(layoutInflater)
@@ -147,6 +151,12 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
             val intent = Intent(this, PopUpWindow::class.java)
             startActivityForResult(intent, 1)
         }
+
+        if(logBool == "1"){
+            bindingClass.ParamButton.visibility = View.INVISIBLE
+            bindingClass.imageView.visibility = View.INVISIBLE
+            bindingClass.textView2.visibility = View.INVISIBLE
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -175,7 +185,7 @@ class GraphActivity : AppCompatActivity(), OnChartValueSelectedListener {
         super.onResume()
         executorService = Executors.newSingleThreadScheduledExecutor()
         executorService.scheduleAtFixedRate({
-            Network.getData(incubNum, typeGraph, promStart, promEnd) {
+            Network.getData(incubNum, typeGraph, logBool, logId, promStart, promEnd) {
                 runOnUiThread(Runnable {
                     if (!it.isEmpty()) {
                         var r: String = ""

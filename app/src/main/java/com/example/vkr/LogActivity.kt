@@ -109,11 +109,24 @@ class LogActivity : AppCompatActivity() {
                     b1.text = "Просмотр"
                     b1.setTextColor(Color.WHITE)
                     b1.background.setTint(ContextCompat.getColor(this, R.color.foodrus))
+                    b1.setOnClickListener{
+                        val intent = Intent(this, GraphActivity::class.java)
+                        intent.putExtra("incubNum", lname[i])
+                        intent.putExtra("logBool", "1")
+                        intent.putExtra("logId", lig[i].toString())
+                        startActivity(intent)
+                    }
                     buttonrow.addView(b1)
                     val b2 = Button(this)
                     b2.text = " Удалить "
                     b2.setTextColor(Color.WHITE)
                     b2.background.setTint(ContextCompat.getColor(this, R.color.red))
+                    b2.setOnClickListener{
+                        Network.deleteLogs(lig[i].toString())
+                        buttonrow.removeAllViews()
+                        tbrow1.removeAllViews()
+                        tbrow2.removeAllViews()
+                    }
                     buttonrow.addView(b2)
                     stk.addView(buttonrow)
                 }

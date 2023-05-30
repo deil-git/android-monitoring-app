@@ -87,7 +87,9 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     val ttbrow = TableRow(this)
                     val tbrow1 = TableRow(this)
                     val chk_onoff = CheckBox(this)
+                    chk_onoff.id = abox_id[i] + 100000
                     val chk_notif = CheckBox(this)
+                    chk_notif.id = abox_id[i] + 1000000
                     if (aonoff[i] == 1) {
                         chk_onoff.setChecked(true)
                     }
@@ -140,7 +142,6 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
 
-
         Network.getDevices {
             var r: String = ""
 
@@ -186,7 +187,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     tbrow2.addView(ct)
                     val et1 = EditText(this)
                     et1.hint = dcorrect_t[i].toString()
-                    et1.id = did[i] + 1000
+                    et1.id = i + 1001
                     et1.setRawInputType(InputType.TYPE_CLASS_NUMBER)
                     et1.setText(dcorrect_t[i].toString())
                     et1.background.setTint(ContextCompat.getColor(this, R.color.foodrus))
@@ -200,7 +201,7 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     tbrow3.addView(ht)
                     val et2 = EditText(this)
                     et2.hint = dcorrect_h[i].toString()
-                    et2.id = did[i] + 10000
+                    et2.id = i + 10001
                     et2.setRawInputType(InputType.TYPE_CLASS_NUMBER)
                     et2.setText(dcorrect_h[i].toString())
                     et2.background.setTint(ContextCompat.getColor(this, R.color.foodrus))
@@ -243,8 +244,26 @@ class ConfigActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 }
             }
 
+            for (i in 1 until aaddress.size+1) {
+                val notif = findViewById<CheckBox>(i + 1000000)
+                if (notif.isChecked){
+                    anotif[i-1] = 1
+                }
+                else{
+                    anotif[i-1] = 0
+                }
+
+                val onoff = findViewById<CheckBox>(i + 100000)
+                if (onoff.isChecked){
+                    aonoff[i-1] = 1
+                }
+                else{
+                    aonoff[i-1] = 0
+                }
+            }
+
             for(i in 0 until abox_id.size) {
-                data_config.add(i, ConfigStruct(abox_id[i], aaddress[i]))
+                data_config.add(i, ConfigStruct(abox_id[i], aaddress[i], aonoff[i], anotif[i]))
             }
 
             Network.sendConfig(data_config){

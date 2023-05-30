@@ -47,19 +47,25 @@ open class Network {
             })
         }
 
-        fun getData(incubNum :String, typeGraph :String, promStart :String, promEnd :String, onResult: (Vector<ServerResponse.Data>) -> Unit) {
+        fun getData(incubNum :String, typeGraph :String, logBool :String, logId :String, promStart :String, promEnd :String, onResult: (Vector<ServerResponse.Data>) -> Unit) {
             val client = OkHttpClient()
             lateinit var request: Request
 
-            if(typeGraph == "RealTime"){
+            if(typeGraph == "RealTime" && logBool == "0"){
                 request = Request.Builder()
                     .url(HttpRoutes.Indications + incubNum)
                     .addHeader("Authorization", "Bearer $token")
                     .build()
             }
-            else{
+            if(typeGraph == "PromTime" && logBool == "0"){
                 request = Request.Builder()
                     .url(HttpRoutes.Indications + incubNum + HttpRoutes.PromTimeStart + promStart + HttpRoutes.PromTimeEnd + promEnd)
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+            }
+            if(logBool == "1"){
+                request = Request.Builder()
+                    .url(HttpRoutes.Logs + "/" + logId)
                     .addHeader("Authorization", "Bearer $token")
                     .build()
             }
@@ -175,6 +181,22 @@ open class Network {
                     }
                     onResult(userList)
                 }
+            })
+        }
+
+        fun deleteLogs(logId :String) {
+            val client = OkHttpClient()
+            lateinit var request: Request
+
+            request = Request.Builder()
+                .url(HttpRoutes.Logs + "/delete/" + logId)
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {}
+
+                override fun onResponse(call: Call, response: Response) {}
             })
         }
 

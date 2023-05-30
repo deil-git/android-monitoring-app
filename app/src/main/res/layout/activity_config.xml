@@ -37,7 +37,7 @@
                     app:srcCompat="@drawable/baseline_power_settings_new_24" />
 
                 <Space
-                    android:layout_width="9dp"
+                    android:layout_width="8dp"
                     android:layout_height="wrap_content" />
 
                 <ImageView
