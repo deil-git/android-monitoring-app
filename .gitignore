@@ -13,5 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/google-services.json
+hs_err_pid4464.log
 hs_err_pid20056.log
 hs_err_pid7424.log
